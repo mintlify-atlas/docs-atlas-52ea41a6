@@ -1,0 +1,147 @@
+---
+title: "Features"
+description: "A full overview of everything Metrolist can do, organized by category."
+---
+
+Metrolist covers the core YouTube Music experience and extends it with features the official app does not provide. Below is a complete feature breakdown by category.
+
+<Tip>
+  Most features can be configured from the **Settings** screen inside the app. Open the side drawer or tap the profile icon to access **Settings**.
+</Tip>
+
+## Playback
+
+<CardGroup cols={2}>
+  <Card title="Stream any song or video" icon="play">
+    Play any song, album, artist mix, or video available on YouTube Music.
+  </Card>
+  <Card title="Background playback" icon="mobile-screen">
+    Music keeps playing when the screen is off or you switch to another app.
+  </Card>
+  <Card title="Offline downloads" icon="cloud-arrow-down" href="/guide/offline-downloads">
+    Download and cache songs for offline use. Cached songs can be treated as fully offline tracks.
+  </Card>
+  <Card title="Skip silence" icon="forward">
+    Automatically skip silent passages within tracks.
+  </Card>
+  <Card title="Sleep timer" icon="moon">
+    Set a timer to stop playback after a fixed duration. Supports automatic options with fade-out volume handling and a persistent default value.
+  </Card>
+  <Card title="Queue management" icon="list-ol" href="/guide/queue-management">
+    Reorder songs in the queue or within any playlist with drag-and-drop.
+  </Card>
+</CardGroup>
+
+## Audio
+
+<CardGroup cols={2}>
+  <Card title="Audio normalization" icon="sliders">
+    Level loudness across tracks so volume stays consistent between songs.
+  </Card>
+  <Card title="Tempo and pitch control" icon="gauge">
+    Adjust playback speed and pitch independently without affecting each other.
+  </Card>
+  <Card title="Equalizer" icon="wave-square">
+    Fine-tune frequency response with the system or built-in equalizer.
+  </Card>
+</CardGroup>
+
+## Lyrics and discovery
+
+<CardGroup cols={2}>
+  <Card title="Live synced lyrics" icon="align-left" href="/guide/lyrics">
+    Time-synced, word-by-word highlighted lyrics sourced from BetterLyrics, LrcLib, KuGou, SimpMusic, and YouTube.
+  </Card>
+  <Card title="AI-powered lyrics translation" icon="language" href="/guide/lyrics-translation">
+    Translate lyrics into your language using AI. Supports customizable prompts and multiple AI providers including Mistral.
+  </Card>
+  <Card title="Personalized quick picks" icon="sparkles">
+    Home screen recommendations based on your listening history, powered by YouTube Music.
+  </Card>
+  <Card title="Search" icon="magnifying-glass">
+    Search songs, albums, artists, videos, playlists, and podcasts across YouTube Music.
+  </Card>
+  <Card title="Music recognition" icon="ear-listen" href="/guide/music-recognition">
+    Identify songs playing around you using built-in Shazam-powered recognition. Accessible from a home screen widget or Quick Settings tile.
+  </Card>
+  <Card title="Radio" icon="radio">
+    Start a radio from any track, album, or artist. Radio starts seamlessly when initiated from the currently playing song.
+  </Card>
+</CardGroup>
+
+## Library and account
+
+<CardGroup cols={2}>
+  <Card title="Full library management" icon="books" href="/guide/library">
+    Browse and manage your liked songs, albums, artists, and playlists.
+  </Card>
+  <Card title="Local playlists" icon="list-music" href="/guide/playlists">
+    Create and manage playlists stored locally on your device.
+  </Card>
+  <Card title="Import and export playlists" icon="arrow-right-arrow-left" href="/guide/playlists">
+    Import playlists from CSV files or export your local playlists. Upload and delete songs via your YouTube Music account.
+  </Card>
+  <Card title="YouTube Music account sync" icon="rotate">
+    Log in with your YouTube Music account to sync liked songs, artists, albums, and playlists across devices.
+  </Card>
+  <Card title="Podcast support" icon="podcast" href="/guide/podcasts">
+    Full podcast library support including channel subscriptions for podcasts and artists.
+  </Card>
+  <Card title="Listening stats" icon="chart-bar" href="/guide/stats-and-history">
+    Track per-song play counts and listening time. Includes a time transfer feature to move listening time between songs.
+  </Card>
+</CardGroup>
+
+## Social
+
+<CardGroup cols={2}>
+  <Card title="Listen Together" icon="users" href="/guide/listen-together">
+    Create a real-time listening room and sync playback with friends anywhere. Uses a low-latency protobuf-based protocol with optional auto-approve for song requests.
+  </Card>
+  <Card title="Discord Rich Presence" icon="discord">
+    Show your currently playing song in your Discord status via the Kizzy integration.
+  </Card>
+  <Card title="Last.fm scrobbling" icon="lastfm">
+    Scrobble your listens to Last.fm automatically as you play.
+  </Card>
+</CardGroup>
+
+## Interface
+
+<CardGroup cols={2}>
+  <Card title="Home screen widget" icon="grid-2">
+    A resizable now-playing widget for your Android home screen. A separate music recognizer widget is also available.
+  </Card>
+  <Card title="Theme modes" icon="palette" href="/config/themes-and-colors">
+    Choose from Light, Dark, Black, or Dynamic (Material You) theme modes.
+  </Card>
+  <Card title="Color palettes" icon="swatchbook" href="/config/themes-and-colors">
+    Pick from Dynamic color or 19 built-in color palettes to personalize the app's accent color.
+  </Card>
+  <Card title="Material 3" icon="sparkles">
+    Built with Material 3 including Material 3 Expressive components for a modern, cohesive look.
+  </Card>
+  <Card title="Android Auto" icon="car" href="/config/android-auto">
+    Browse and control playback from your car's display with Android Auto support.
+  </Card>
+  <Card title="Quick Settings tile" icon="toggle-on">
+    Trigger music recognition directly from the Android Quick Settings panel.
+  </Card>
+</CardGroup>
+
+## Integrations
+
+<AccordionGroup>
+  <Accordion title="Last.fm" icon="lastfm">
+    Metrolist integrates with Last.fm to scrobble your listening history. Configure your Last.fm account in **Settings → Integrations → Last.fm**.
+  </Accordion>
+  <Accordion title="Discord Rich Presence" icon="discord">
+    Show your current track in your Discord status using the built-in Kizzy integration. Configure in **Settings → Integrations → Discord Rich Presence**.
+  </Accordion>
+  <Accordion title="AI lyrics translation" icon="robot">
+    Translate lyrics using an AI provider of your choice. Supports customizable prompts and Mistral AI models. Configure in **Settings → Lyrics**.
+  </Accordion>
+  <Accordion title="Shazam music recognition" icon="ear-listen">
+    The music recognizer uses the Shazam API (via ShazamKit) entirely in Kotlin with no NDK dependency. Accessible from the player, a home screen widget, or a Quick Settings tile.
+  </Accordion>
+</AccordionGroup>

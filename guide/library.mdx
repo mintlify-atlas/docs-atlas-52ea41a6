@@ -1,0 +1,149 @@
+---
+title: "Library"
+description: "Browse and manage your songs, artists, albums, playlists, and podcasts in one place."
+---
+
+The Library screen is your personal music collection inside Metrolist. It aggregates everything you have saved, downloaded, or uploaded, and lets you browse by content type using filter chips at the top of the screen.
+
+## Filter chips
+
+Tapping a filter chip at the top of the Library screen narrows the view to a specific content type. Tapping the active chip again deselects it and returns to the combined **Library** view.
+
+<CardGroup cols={3}>
+  <Card title="Playlists" icon="list-music">
+    Your local and imported playlists, plus the built-in smart playlists.
+  </Card>
+  <Card title="Songs" icon="music">
+    All songs you have liked, saved to your library, uploaded, or downloaded.
+  </Card>
+  <Card title="Albums" icon="disc">
+    Albums you have bookmarked from YouTube Music or browsed locally.
+  </Card>
+  <Card title="Artists" icon="microphone">
+    Artists you have followed or that appear in your saved songs and albums.
+  </Card>
+  <Card title="Podcasts" icon="podcast">
+    Podcast shows you have saved and their episodes.
+  </Card>
+  <Card title="Library (default)" icon="library">
+    A combined grid or list of all your playlists, albums, and artists together.
+  </Card>
+</CardGroup>
+
+## Built-in smart playlists
+
+The Library view and the Playlists filter both surface several built-in playlists that are generated automatically. Each one can be shown or hidden independently.
+
+<AccordionGroup>
+  <Accordion title="Liked Songs">
+    Contains every song where `liked = true` in the local database. Tapping the heart icon on any song — or long-pressing and choosing **Like** — adds it here. When you are logged in, likes are synced to and from YouTube Music.
+  </Accordion>
+  <Accordion title="Downloaded">
+    Contains every song that has been downloaded to device storage (`isDownloaded = true`). Available fully offline.
+  </Accordion>
+  <Accordion title="Cached Songs">
+    Contains songs that have been streamed and cached by the player (`isCached = true`). Added in v13.4.0, cached songs can be treated as offline songs.
+  </Accordion>
+  <Accordion title="Top Songs">
+    A dynamic ranking of your most-played tracks based on total play time. The playlist size (e.g., "My Top 50") is configurable in settings.
+  </Accordion>
+  <Accordion title="Uploaded Songs">
+    Songs you have uploaded directly to YouTube Music from Metrolist. Requires a logged-in account. See [uploading songs](#uploading-songs) below.
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+  You can choose which smart playlists appear in your Library. Go to **Settings → Appearance** and toggle the visibility of Liked Songs, Downloaded, Cached, Top Songs, and Uploaded Songs individually.
+</Tip>
+
+## Liking and unliking a song
+
+<Steps>
+  <Step title="While a song is playing">
+    Tap the heart icon in the player controls to like or unlike the current track.
+  </Step>
+  <Step title="From the song list">
+    Long-press any song in the Library or any playlist to open the context menu, then tap **Like** or **Unlike**.
+  </Step>
+  <Step title="From the three-dot menu">
+    Tap the **⋮** (more) button next to any song and select **Like** or **Unlike** from the menu.
+  </Step>
+</Steps>
+
+When you are logged in with a YouTube Music account, the like is synced to YouTube Music automatically via the `YouTube.likeVideo` API. Unliking removes it from both the local database and your YouTube Music account.
+
+## Sorting and filtering songs
+
+Inside the **Songs** filter, a secondary row of chips lets you narrow songs further:
+
+| Chip | Shows |
+|---|---|
+| **Liked** | Songs where `liked = true` |
+| **Library** | Songs saved to your library (`inLibrary` is set) |
+| **Uploaded** | Songs you have uploaded to YouTube Music |
+| **Downloaded** | Songs downloaded to device storage |
+
+You can also sort songs by:
+
+- **Date added** — most recent first (default)
+- **Name** — alphabetical
+- **Artist** — alphabetical by artist name
+- **Play time** — most played first
+
+Tap the sort label to cycle through options, and tap the arrow to toggle ascending/descending order.
+
+## Syncing with your YouTube Music account
+
+When you are logged in, Metrolist automatically syncs your library with YouTube Music each time you open the Library screen. This includes:
+
+- **Liked songs** — pulled from your YouTube Music likes
+- **Library songs** — songs saved to your YTM library
+- **Albums** — bookmarked albums
+- **Artists** — followed artists
+- **Playlists** — your YouTube Music playlists
+
+Sync happens in the background and requires an active internet connection. You can also pull-to-refresh on the main Library view to trigger a manual sync.
+
+<Note>
+  Sync requires you to be logged in with a Google account. See [Account login](/setup/account-login) for setup instructions.
+</Note>
+
+## Uploading songs
+
+Metrolist supports uploading local audio files directly to your YouTube Music library (added in v13.3.0). Uploaded files are stored in YouTube Music and appear in the **Uploaded Songs** smart playlist.
+
+<Steps>
+  <Step title="Open the Songs filter">
+    Tap **Songs** in the Library filter chips.
+  </Step>
+  <Step title="Switch to the Uploaded chip">
+    Tap the **Uploaded** chip in the secondary filter row.
+  </Step>
+  <Step title="Tap the upload button">
+    Tap the floating upload button (upload icon) in the bottom-right corner.
+  </Step>
+  <Step title="Select files">
+    The system file picker opens. You can select multiple files at once. Supported formats: MP3, MP4, M4A, FLAC, OGG, WMA.
+  </Step>
+  <Step title="Monitor progress">
+    A progress dialog shows the current file name, upload index, and a progress bar. You can cancel at any time.
+  </Step>
+</Steps>
+
+<Warning>
+  There is a maximum file size limit enforced by the YouTube Music upload API. Files that exceed the limit or use an unsupported format will be skipped with a toast notification.
+</Warning>
+
+## Browsing artists and albums
+
+The **Artists** and **Albums** filter chips show your saved artists and albums respectively. Both support list and grid view — tap the view-toggle icon in the sort header to switch.
+
+- Tap an artist to open their full artist page with top songs, albums, and related content from YouTube Music.
+- Tap an album to open the album detail screen with track listing and playback controls.
+- Long-press any item or tap **⋮** to access context menu options such as **Play**, **Shuffle**, **Add to playlist**, and **Remove from library**.
+
+The combined Library view (default, no chip selected) merges your playlists, artists, and albums into a single sorted list. You can sort by **Date added**, **Name**, or **Last updated**.
+
+## Searching within the library
+
+Inside any playlist screen, tap the search icon in the top bar to filter songs by title or artist name. This is a local, instant filter — no network request is made.

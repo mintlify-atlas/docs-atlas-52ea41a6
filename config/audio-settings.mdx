@@ -1,0 +1,131 @@
+---
+title: "Audio settings"
+description: "Configure streaming quality, volume normalization, the equalizer, audio offload, crossfade, and other audio-related options."
+---
+
+Audio settings control how Metrolist streams, processes, and outputs sound. You can find all of these options under **Settings → Player & Audio**.
+
+## Audio quality
+
+Metrolist lets you choose the quality tier used when streaming from YouTube Music.
+
+<CardGroup cols={3}>
+  <Card title="Auto" icon="wand-magic-sparkles">
+    Metrolist picks the best quality available based on your connection. This is the default.
+  </Card>
+  <Card title="High" icon="signal">
+    Always requests the highest available bitrate. Uses more data and may buffer more on slower connections.
+  </Card>
+  <Card title="Low" icon="signal-weak">
+    Requests a lower bitrate stream. Useful on metered or slow connections to reduce data usage.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Leave audio quality on **Auto** unless you have a specific reason to override it. YouTube Music does not always have every quality tier available for every track.
+</Tip>
+
+## Audio normalization
+
+When enabled, Metrolist equalizes the perceived loudness across tracks so that quieter songs are not drowned out by louder ones and vice versa.
+
+| Setting | Default |
+|---|---|
+| Audio normalization | On |
+
+Normalization is applied in the playback pipeline and does not alter the source stream. Turn it off if you prefer to receive audio exactly as YouTube Music sends it.
+
+## Equalizer
+
+Metrolist includes a built-in equalizer screen that lets you load and apply custom EQ profiles.
+
+<Steps>
+  <Step title="Open the equalizer">
+    Go to **Settings → Player & Audio** and tap **Equalizer**, or tap the equalizer icon directly from the expanded player screen.
+  </Step>
+  <Step title="Choose a profile">
+    Select **No equalization** to bypass the EQ, or pick a saved custom profile from the list. The active profile is indicated with a filled radio button.
+  </Step>
+  <Step title="Import a custom profile">
+    Tap the **+** icon in the equalizer header to import a profile from a `.txt` file in ParametricEQ format. The file name (without extension) becomes the profile name.
+  </Step>
+  <Step title="Use the system equalizer">
+    Tap the equalizer icon in the header to open Android's system audio effect control panel for the current audio session. Changes made there apply alongside any Metrolist-level processing.
+  </Step>
+</Steps>
+
+<Note>
+  The system equalizer button launches `AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL` with the active audio session ID. It requires a compatible equalizer app to be installed on the device — Android does not provide one by default on all manufacturers.
+</Note>
+
+<AccordionGroup>
+  <Accordion title="Custom profile format">
+    Profiles must be plain-text files in ParametricEQ format (`.txt`). Each line describes a filter band. The file name (without `.txt`) is used as the profile display name. Invalid files are rejected with a descriptive error dialog.
+  </Accordion>
+  <Accordion title="Deleting a profile">
+    Tap the red delete icon on a custom profile row in the equalizer list. A confirmation dialog appears before the profile is removed. The **No equalization** entry cannot be deleted.
+  </Accordion>
+</AccordionGroup>
+
+## Audio offload
+
+Audio offload delegates PCM decoding and rendering to the device's dedicated audio DSP hardware instead of the CPU. This reduces power consumption during long listening sessions.
+
+| Setting | Default | Preference key |
+|---|---|---|
+| Audio offload | Off | `enableOffload` |
+
+<Warning>
+  Audio offload is **automatically disabled when crossfade is active**. Crossfade requires continuous CPU-based mixing, which is incompatible with hardware offload. The toggle is grayed out when crossfade is on.
+</Warning>
+
+## Skip silence
+
+Metrolist can automatically detect and skip over silent sections within a track.
+
+| Setting | Default | Notes |
+|---|---|---|
+| Skip silence | Off | Silences are detected in real time by `SilenceDetectorAudioProcessor` |
+| Skip silence — instant mode | Off | Requires skip silence to be on |
+
+**Instant mode** triggers an immediate track-level seek as soon as a silence block exceeding 2 seconds (2,000,000 µs) is detected. Without instant mode, the standard ExoPlayer silence-skipping heuristic is used instead.
+
+<Note>
+  Instant mode uses a lightweight PCM pass-through processor (`SilenceDetectorAudioProcessor`) that scans each audio frame for amplitude below a threshold of 256 (16-bit PCM). It does not alter the audio data — it only detects silence and notifies the player.
+</Note>
+
+## Pause on mute
+
+When enabled, Metrolist pauses playback whenever the device media volume is set to zero. Playback resumes when the volume is raised above zero.
+
+| Setting | Default |
+|---|---|
+| Pause on mute | Off |
+
+## Resume on Bluetooth connect
+
+When enabled, Metrolist automatically resumes playback when a Bluetooth audio device connects.
+
+| Setting | Default |
+|---|---|
+| Resume on Bluetooth connect | Off |
+
+## Crossfade
+
+Crossfade blends the end of the current track into the beginning of the next one, eliminating hard cuts between songs.
+
+<Warning>
+  Crossfade is a **beta feature**. A confirmation dialog is shown the first time you enable it.
+</Warning>
+
+<AccordionGroup>
+  <Accordion title="Enable crossfade" defaultOpen={true}>
+    Toggle **Crossfade** under **Settings → Player & Audio**. Enabling it will disable audio offload for the duration crossfade is active.
+  </Accordion>
+  <Accordion title="Crossfade duration">
+    Adjustable from **1 to 15 seconds** using a slider. The default is 5 seconds. Only visible when crossfade is enabled.
+  </Accordion>
+  <Accordion title="Gapless crossfade">
+    When enabled (default), the crossfade is calculated so that the tracks line up without audible gaps. Disable this if you want a more pronounced overlap effect. Only visible when crossfade is enabled.
+  </Accordion>
+</AccordionGroup>

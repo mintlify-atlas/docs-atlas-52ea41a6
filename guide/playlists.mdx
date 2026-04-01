@@ -1,0 +1,140 @@
+---
+title: "Playlists"
+description: "Create, manage, import, and export playlists in Metrolist."
+---
+
+Metrolist gives you full control over your playlists. You can create local playlists from scratch, import playlists from YouTube Music or a CSV file, reorder songs with drag handles, and export playlists for backup or sharing.
+
+<Note>
+  Local playlists are stored in Metrolist's on-device database and are not automatically synced back to YouTube Music. If you want a playlist to appear in your YouTube Music account, create it while logged in and enable syncing when prompted.
+</Note>
+
+## Creating a local playlist
+
+<Steps>
+  <Step title="Open the Playlists filter">
+    Tap **Playlists** in the Library filter chips at the top of the Library screen.
+  </Step>
+  <Step title="Tap the add button">
+    Tap the floating **+** button in the bottom-right corner. A dialog appears asking for a name.
+  </Step>
+  <Step title="Name your playlist">
+    Type a name and tap **OK**. Metrolist creates the playlist immediately and navigates to it.
+  </Step>
+</Steps>
+
+## Adding songs to a playlist
+
+<Steps>
+  <Step title="Long-press a song">
+    Long-press any song anywhere in Metrolist — in search results, an album, an artist page, or another playlist — to open the song context menu.
+  </Step>
+  <Step title="Tap Add to playlist">
+    Select **Add to playlist** from the menu. A list of your local playlists appears.
+  </Step>
+  <Step title="Choose a playlist">
+    Tap the target playlist. The song is added instantly. If you want to add to a new playlist, tap **New playlist** at the top of the list.
+  </Step>
+</Steps>
+
+You can also add a song via the **⋮** (three-dot) button next to any song row.
+
+## Reordering songs
+
+Songs inside a local playlist can be reordered manually using drag handles.
+
+<Steps>
+  <Step title="Open the playlist">
+    Tap any local playlist to open it.
+  </Step>
+  <Step title="Set sort order to Custom">
+    Tap the sort label and select **Custom** order.
+  </Step>
+  <Step title="Unlock the playlist">
+    Tap the lock icon in the sort header row to unlock editing. The icon changes to an open lock.
+  </Step>
+  <Step title="Drag to reorder">
+    Use the drag handle (≡ icon) on the right side of any song row to drag it to a new position. The order is saved automatically when you release.
+  </Step>
+</Steps>
+
+If the playlist is linked to a YouTube Music playlist, Metrolist also syncs the new order to YouTube Music in the background.
+
+## Playing and shuffling a playlist
+
+- **Tap any song** in the playlist to start playback from that song, queuing the rest of the playlist in order.
+- **Shuffle**: Tap **⋮** on the playlist and select **Shuffle** to start playback in a random order.
+- The playlist name appears as the queue title in the player.
+
+## Importing playlists from YouTube Music
+
+When you are logged in, your YouTube Music playlists are synced automatically and appear in the **Playlists** filter. You can also force a sync by pulling-to-refresh on the Library screen.
+
+Imported playlists are stored locally and link back to their YouTube Music counterpart. Edits you make (renaming, reordering, removing songs) are synced back to YouTube Music.
+
+## Importing playlists from a CSV file
+
+Metrolist supports importing playlists from CSV files. The CSV import dialog is scrollable, which makes it easy to review large playlists before importing.
+
+<Steps>
+  <Step title="Open the Playlists filter">
+    Tap **Playlists** in the Library filter chips.
+  </Step>
+  <Step title="Open the playlist menu">
+    Tap **⋮** at the top of the screen, or long-press an existing playlist, and look for **Import from CSV**.
+  </Step>
+  <Step title="Select your CSV file">
+    The file picker opens. Navigate to your CSV file and select it.
+  </Step>
+  <Step title="Review and confirm">
+    The import dialog shows the songs found in the file. Scroll through the list to review, then confirm to import.
+  </Step>
+</Steps>
+
+<Info>
+  The CSV import crashed in earlier versions. This was fixed in v13.3.0 — make sure you are running v13.3.0 or later for reliable CSV imports.
+</Info>
+
+## Exporting playlists to CSV
+
+You can export any local playlist to a CSV file for backup or use in another app (added in v13.3.0).
+
+<Steps>
+  <Step title="Open the playlist">
+    Navigate to the playlist you want to export.
+  </Step>
+  <Step title="Open the playlist context menu">
+    Tap **⋮** in the top bar or long-press the playlist in the Playlists screen.
+  </Step>
+  <Step title="Tap Export to CSV">
+    Select **Export to CSV** from the context menu. Metrolist generates the file and opens a share sheet so you can save or send it.
+  </Step>
+</Steps>
+
+## Deleting a playlist
+
+<Steps>
+  <Step title="Open the playlist">
+    Navigate to the playlist you want to delete.
+  </Step>
+  <Step title="Open the context menu">
+    Tap **⋮** in the top bar, or long-press the playlist entry in the Playlists screen.
+  </Step>
+  <Step title="Tap Delete">
+    Select **Delete playlist** and confirm. If the playlist is linked to a YouTube Music playlist, Metrolist also deletes it from your YouTube Music account.
+  </Step>
+</Steps>
+
+## Speed dial — pinned playlists for quick access
+
+Speed dial lets you pin playlists (and other items like songs, albums, and artists) to a quick-access widget on the home screen or elsewhere in the UI.
+
+- Long-press a playlist or tap **⋮** and select **Pin to speed dial**.
+- Pinned items are stored in the `speed_dial_item` database table with a `type` of `"PLAYLIST"` or `"LOCAL_PLAYLIST"`.
+- To remove a pinned item, tap **⋮** and select **Unpin from speed dial**.
+
+Speed dial supports songs, albums, artists, online playlists, and local playlists.
+
+## Reliable playlist additions
+
+Metrolist v13.4.0 fixed a "ghost adds" bug where songs appeared to be added to a playlist but were not actually saved. This issue affected playlists linked to YouTube Music accounts. The fix ensures that additions are reliably committed both locally and to YouTube Music.

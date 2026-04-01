@@ -1,0 +1,84 @@
+---
+title: "Installation"
+description: "Download and install Metrolist on your Android device."
+---
+
+## System requirements
+
+Metrolist requires **Android 8.0 (API level 26)** or later. It runs on phones and tablets. No Google account or Google Play Services is required for the default FOSS build.
+
+## Build flavors
+
+Metrolist is distributed in three variants. Choose the one that fits your setup:
+
+<CardGroup cols={3}>
+  <Card title="FOSS (default)" icon="shield">
+    No Google Play Services required. Google Cast is not available. Includes the built-in updater. Recommended for most users.
+  </Card>
+  <Card title="GMS" icon="cast">
+    Adds Google Cast support for streaming to Chromecast and Cast-enabled devices. Requires Google Play Services to be installed on your device.
+  </Card>
+  <Card title="IzzyOnDroid" icon="store">
+    Same as FOSS but with the built-in updater disabled — IzzyOnDroid handles updates automatically through its repository.
+  </Card>
+</CardGroup>
+
+<Note>
+  The IzzyOnDroid variant has the built-in updater disabled because the store manages updates on your behalf. If you install from IzzyOnDroid, update through the IzzyOnDroid app or F-Droid client instead.
+</Note>
+
+## Install Metrolist
+
+<Steps>
+  <Step title="Download the APK">
+    Get the latest release from one of the official sources:
+
+    <CardGroup cols={2}>
+      <Card title="GitHub Releases" icon="github" href="https://github.com/MetrolistGroup/Metrolist/releases/latest/download/Metrolist.apk">
+        Direct APK download from the official GitHub repository. Always up to date.
+      </Card>
+      <Card title="Obtainium" icon="rotate" href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/MetrolistGroup/Metrolist/">
+        Tracks GitHub Releases and notifies you when a new version is available.
+      </Card>
+      <Card title="IzzyOnDroid" icon="store" href="https://apt.izzysoft.de/fdroid/index/apk/com.metrolist.music">
+        F-Droid-compatible repository. Delivers the IzzyOnDroid variant.
+      </Card>
+      <Card title="OpenAPK" icon="box" href="https://www.openapk.net/metrolist/com.metrolist.music/">
+        Third-party APK mirror.
+      </Card>
+    </CardGroup>
+  </Step>
+
+  <Step title="Allow installation from unknown sources">
+    Because Metrolist is not distributed through the Google Play Store, Android requires you to permit APK installs from outside the store.
+
+    1. Open **Settings** on your device.
+    2. Go to **Apps** (or **Application management**) → find your browser or file manager.
+    3. Tap **Install unknown apps** and enable **Allow from this source**.
+
+    The exact path varies by device manufacturer and Android version. On some devices you will see a prompt automatically when you open the APK.
+  </Step>
+
+  <Step title="Open the downloaded APK and install">
+    Locate the downloaded `.apk` file in your notifications or in your **Downloads** folder, tap it, and follow the on-screen prompts to complete installation.
+  </Step>
+</Steps>
+
+## Automatic updates with Obtainium
+
+[Obtainium](https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/MetrolistGroup/Metrolist/) is the recommended way to keep Metrolist up to date. It monitors GitHub Releases directly and can download and install new versions automatically without the Play Store.
+
+<Tip>
+  Use the Obtainium link above to add Metrolist in one tap. Obtainium will track releases and prompt you when an update is available.
+</Tip>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Account login" icon="user" href="/setup/account-login">
+    Sign in with your YouTube Music account to sync your library.
+  </Card>
+  <Card title="Regional restrictions" icon="globe" href="/setup/regional-restrictions">
+    Find out if YouTube Music is available in your region.
+  </Card>
+</CardGroup>

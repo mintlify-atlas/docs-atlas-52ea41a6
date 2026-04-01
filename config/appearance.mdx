@@ -1,0 +1,313 @@
+---
+title: Appearance
+description: Customize how Metrolist looks — from themes and player backgrounds to lyrics display and navigation behavior.
+---
+
+Metrolist provides extensive appearance controls across six areas: theme, mini player, player, navigation, library, and lyrics. All settings are found under **Settings → Appearance**.
+
+## Theme
+
+<AccordionGroup>
+  <Accordion title="Dynamic icon" icon="image">
+    When enabled, the app launcher icon adapts to match your wallpaper color on supported Android versions. Changing this setting requires a restart to apply. A prompt will appear offering to restart immediately.
+
+    **Default:** enabled
+  </Accordion>
+
+  <Accordion title="High refresh rate" icon="zap">
+    Allows Metrolist to render at your display's maximum refresh rate (90 Hz or 120 Hz, depending on your device). Disable this to reduce battery usage on high-refresh-rate panels.
+
+    **Default:** enabled
+  </Accordion>
+
+  <Accordion title="Dynamic theme" icon="palette">
+    When enabled and no custom color is selected, Metrolist extracts accent colors from your current wallpaper using Material You (requires Android 12 or later). This option is hidden automatically when a custom color palette is selected — selecting any palette other than Dynamic disables dynamic theme.
+
+    **Default:** enabled
+  </Accordion>
+
+  <Accordion title="Theme color" icon="swatch-book">
+    Opens the [Themes and colors](/config/themes-and-colors) screen, where you can choose from 19 built-in color palettes or use the Dynamic (wallpaper-derived) color option.
+
+    See [Themes and colors](/config/themes-and-colors) for the full palette list and dark mode options.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Mini player
+
+<AccordionGroup>
+  <Accordion title="New mini player design" icon="layout-panel-top">
+    Switches the mini player to the updated visual design. The background style options below require this to be enabled.
+
+    **Default:** enabled
+  </Accordion>
+
+  <Accordion title="Mini player background style" icon="layers">
+    Controls how the mini player background is rendered. Only available when the new mini player design is enabled.
+
+    | Style | Description |
+    |---|---|
+    | Default | Follows the active app theme |
+    | Transparent | No background fill |
+    | Blur | Blurs content behind the mini player (requires Android 12+) |
+    | Gradient | Gradient derived from album art colors |
+    | Pure Black | Solid `#000000` background |
+
+    **Default:** Default
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Player
+
+<AccordionGroup>
+  <Accordion title="New player design" icon="music">
+    Switches the full-screen player to the updated layout.
+
+    **Default:** enabled
+  </Accordion>
+
+  <Accordion title="Player background style" icon="image">
+    Sets how the full-screen player background is rendered.
+
+    | Style | Description |
+    |---|---|
+    | Default | Follows the active app theme |
+    | Gradient | Gradient derived from album art colors |
+    | Blur | Blurs the album art behind the player controls (requires Android 12+) |
+
+    **Default:** Default
+  </Accordion>
+
+  <Accordion title="Hide player thumbnail" icon="image-off">
+    Hides the album art thumbnail in the full-screen player. Useful if you prefer a minimal view focused on controls and lyrics.
+
+    **Default:** disabled
+  </Accordion>
+
+  <Accordion title="Crop album art" icon="crop">
+    Crops the album art to fill the thumbnail area, removing letterboxing on non-square covers.
+
+    **Default:** disabled
+  </Accordion>
+
+  <Accordion title="Player button style" icon="circle-play">
+    Controls the color applied to the playback control buttons.
+
+    | Style | Description |
+    |---|---|
+    | Default | Standard theme surface color |
+    | Primary color | Uses the primary color from the active palette |
+    | Tertiary color | Uses the tertiary color from the active palette |
+
+    **Default:** Default
+  </Accordion>
+
+  <Accordion title="Player slider style" icon="sliders-horizontal">
+    Sets the visual style of the playback progress slider.
+
+    | Style | Description |
+    |---|---|
+    | Default | Standard Material 3 slider with thumb |
+    | Wavy | Animated wave that pulses while playing |
+    | Slim | Thin bar track with no thumb |
+    | Squiggly | Animated squiggly line that moves while playing |
+
+    **Default:** Default
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Swipe and navigation
+
+<AccordionGroup>
+  <Accordion title="Swipe thumbnail to change song" icon="arrow-left-right">
+    Enables swiping the album art in the full-screen player to skip to the previous or next track.
+
+    **Default:** enabled
+  </Accordion>
+
+  <Accordion title="Swipe sensitivity" icon="sliders-horizontal">
+    Adjusts how far you must swipe before a track change is triggered. Expressed as a percentage (0–100%). Only shown when swipe thumbnail is enabled.
+
+    **Default:** 73%
+  </Accordion>
+
+  <Accordion title="Swipe to remove song from queue" icon="list-x">
+    Enables swipe-to-dismiss on items in the queue list.
+
+    **Default:** disabled
+  </Accordion>
+
+  <Accordion title="Swipe to song" icon="arrow-right">
+    Enables an alternate swipe gesture on the queue that navigates directly to the swiped song rather than dismissing it.
+
+    **Default:** disabled
+  </Accordion>
+
+  <Accordion title="Slim nav bar" icon="layout-dashboard">
+    Reduces the height of the bottom navigation bar for a more compact layout.
+
+    **Default:** disabled
+  </Accordion>
+
+  <Accordion title="Default open tab" icon="home">
+    Sets the tab that opens when you launch the app.
+
+    Options: **Home**, **Search**, **Library**
+
+    **Default:** Home
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Library
+
+<AccordionGroup>
+  <Accordion title="Grid cell size" icon="grid-2x2">
+    Controls how large each grid item appears in grid view.
+
+    | Size | Description |
+    |---|---|
+    | Small | More items per row, compact grid |
+    | Big | Fewer items per row, larger covers |
+
+    **Default:** Small
+  </Accordion>
+
+  <Accordion title="Default library filter" icon="filter">
+    Sets which chip filter is active by default when you open the Library tab.
+
+    Options: **Library**, **Songs**, **Artists**, **Albums**, **Playlists**, **Podcasts**
+
+    **Default:** Library
+  </Accordion>
+
+  <Accordion title="Auto playlists visibility" icon="list-music">
+    Toggle the visibility of each auto-generated playlist in the Library tab.
+
+    <CardGroup cols={2}>
+      <Card title="Liked playlist" icon="heart">
+        Shows or hides the Liked Songs auto-playlist. Default: shown.
+      </Card>
+      <Card title="Downloaded playlist" icon="download">
+        Shows or hides the Downloaded Songs auto-playlist. Default: shown.
+      </Card>
+      <Card title="Top Songs" icon="trending-up">
+        Shows or hides your most-played songs playlist. Default: shown.
+      </Card>
+      <Card title="Uploaded playlist" icon="upload">
+        Shows or hides songs you have uploaded to your account. Default: shown.
+      </Card>
+      <Card title="Cached playlist" icon="database">
+        Shows or hides locally cached songs. Default: shown.
+      </Card>
+    </CardGroup>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Lyrics
+
+<AccordionGroup>
+  <Accordion title="Experimental lyrics" icon="flask-conical">
+    Enables a new lyrics rendering engine that is still in beta. A confirmation dialog appears the first time you enable this. When experimental lyrics is active, the glow effect, animation style, text size, and line spacing controls are replaced by the new engine's own settings.
+
+    **Default:** disabled
+  </Accordion>
+
+  <Accordion title="Glow effect" icon="sparkles">
+    Adds a luminous glow to the active lyric line. Not available when experimental lyrics is enabled.
+
+    **Default:** disabled
+  </Accordion>
+
+  <Accordion title="Animation style" icon="film">
+    Controls how the active lyric line is highlighted as the song progresses. Not available when experimental lyrics is enabled.
+
+    | Style | Description |
+    |---|---|
+    | None | No animation |
+    | Fade | Cross-fades between lines |
+    | Glow | Glows the active line |
+    | Slide | Slides lines into position |
+    | Karaoke | Word-by-word highlight |
+    | Apple | Apple Music-style scale and opacity transition |
+
+    **Default:** Fade
+  </Accordion>
+
+  <Accordion title="Text size" icon="type">
+    Sets the lyrics font size. Range: **12 sp – 48 sp**. Not available when experimental lyrics is enabled.
+
+    **Default:** 24 sp
+  </Accordion>
+
+  <Accordion title="Line spacing" icon="between-horizontal-start">
+    Sets the spacing between lyric lines. Range: **1.0 – 3.0**. Not available when experimental lyrics is enabled.
+
+    **Default:** 1.2
+  </Accordion>
+
+  <Accordion title="Text position" icon="align-center">
+    Sets the horizontal alignment of lyric text.
+
+    Options: **Left**, **Center**, **Right**
+
+    **Default:** Center
+  </Accordion>
+
+  <Accordion title="Click to seek" icon="mouse-pointer-click">
+    Tapping a lyric line seeks the track to that timestamp.
+
+    **Default:** enabled
+  </Accordion>
+
+  <Accordion title="Auto-scroll" icon="arrow-down">
+    The lyrics view automatically scrolls to keep the current line visible.
+
+    **Default:** enabled
+  </Accordion>
+
+  <Accordion title="Hide status bar on fullscreen" icon="eye-off">
+    Hides the system status bar when the player is open in fullscreen mode.
+
+    **Default:** disabled
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Other
+
+<AccordionGroup>
+  <Accordion title="Listen Together in top bar" icon="users">
+    Shows a shortcut to the Listen Together session controls in the top app bar.
+
+    **Default:** enabled
+  </Accordion>
+
+  <Accordion title="UI density" icon="layout-grid">
+    Scales the overall UI density. Smaller values pack more content on screen.
+
+    | Option | Scale |
+    |---|---|
+    | Native | 100% |
+    | Slightly Compact | 85% |
+    | Compact | 75% |
+    | Very Compact | 65% |
+    | Ultra Compact | 55% |
+
+    <Warning>
+      Changing the UI density requires a full app restart to take effect. A restart prompt will appear after you select a new value.
+    </Warning>
+
+    **Default:** Native (100%)
+  </Accordion>
+</AccordionGroup>

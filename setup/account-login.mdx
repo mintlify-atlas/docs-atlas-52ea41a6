@@ -1,0 +1,52 @@
+---
+title: "Account login"
+description: "Sign in with your YouTube Music account to sync your library, playlists, and listening history."
+---
+
+## Login is optional
+
+You do not need a YouTube Music account to use Metrolist. The app works without login for browsing, searching, and playing music from YouTube Music.
+
+Signing in unlocks account-linked features:
+
+- **Liked songs** — access and sync your liked tracks
+- **Playlists** — view and play your YouTube Music playlists
+- **Subscribed artists** — browse artists you follow
+- **Albums** — access your saved albums
+- **Listening history** — continue where you left off
+- **Podcasts** — access subscribed podcast shows and channels
+
+<Warning>
+  Login requires a **YouTube Music** account — a standard Google account alone is not sufficient. YouTube Music must be available in your region. If it is not, see [Regional restrictions](/setup/regional-restrictions).
+</Warning>
+
+## How to sign in
+
+<Steps>
+  <Step title="Open Settings">
+    Tap the **Settings** icon in the bottom navigation bar or from the side drawer.
+  </Step>
+  <Step title="Go to Account">
+    Tap **Account** in the Settings menu.
+  </Step>
+  <Step title="Sign in with YouTube Music">
+    Tap **Sign in**. A browser-based login screen opens, loading the Google sign-in page for YouTube Music (`accounts.google.com`).
+  </Step>
+  <Step title="Complete the Google sign-in flow">
+    Enter your Google account credentials and complete any two-factor authentication steps. Once you land on `music.youtube.com`, Metrolist detects the successful login, stores your session locally, and restarts the app to apply your account state.
+  </Step>
+</Steps>
+
+<Note>
+  After a successful login, Metrolist restarts automatically. This is expected — the app reloads to apply your account session throughout the interface.
+</Note>
+
+## How to sign out
+
+1. Open **Settings** → **Account**.
+2. Tap **Sign out**.
+3. A dialog will ask whether you want to **keep** or **clear** your local library data (downloaded songs, local playlists, and cached content). Choose the option that suits you, then confirm.
+
+## Privacy
+
+Your credentials are never sent to Metrolist's servers. The login flow happens entirely inside an in-app WebView connected directly to Google's authentication pages. Your session cookie and account data are stored **locally on your device** only and are not shared with any third party.

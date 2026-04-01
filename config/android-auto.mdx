@@ -1,0 +1,72 @@
+---
+title: "Android Auto"
+description: "Use Metrolist from your car's dashboard with Android Auto. Browse your library, control playback, and manage queues without picking up your phone."
+---
+
+## What Android Auto support provides
+
+Android Auto projects a simplified interface onto your car's built-in display (or your phone screen in phone-only mode). When Metrolist is installed, it appears automatically as an available media app in Android Auto — no extra configuration is required to make it show up.
+
+v13.4.0 included multiple improvements to Android Auto support, improving reliability and adding new customization options.
+
+## Requirements
+
+- Android Auto installed on your phone
+- A compatible car head unit with Android Auto support, **or** Android Auto running in phone-only mode (no head unit required)
+
+<Note>
+  Feature availability in Android Auto depends on your car's head unit, the version of Android Auto installed, and your country. Some controls or browse features may not be present on all setups.
+</Note>
+
+## What works in Android Auto
+
+<CardGroup cols={2}>
+  <Card title="Browse library" icon="library">
+    Navigate your Liked Songs, Songs, Artists, Albums, and Playlists sections directly from the car display.
+  </Card>
+  <Card title="Search" icon="search">
+    Search for tracks, artists, or albums using voice input or the on-screen keyboard (where supported by your head unit).
+  </Card>
+  <Card title="Playback controls" icon="play">
+    Play, pause, skip, and seek using the head unit controls or steering wheel buttons.
+  </Card>
+  <Card title="Queue" icon="list">
+    View the current playback queue and skip to any track.
+  </Card>
+</CardGroup>
+
+## Settings
+
+Configure Android Auto behavior under **Settings → Integrations → Android Auto**.
+
+### Visible sections
+
+Choose which library sections appear in the Android Auto browse menu and in what order. The available sections are:
+
+- Liked Songs
+- Songs
+- Artists
+- Albums
+- Playlists
+
+Each section can be toggled on or off individually. Drag sections using the handle on the right to reorder them. The order you set here is the order they appear in Android Auto.
+
+### Quick-add target playlist
+
+When you quick-add a song from Android Auto, Metrolist adds it to a playlist of your choice. Go to **Settings → Integrations → Android Auto → Target playlist** to select which playlist receives these additions.
+
+Set it to **Auto** (the default) to let Metrolist choose automatically, or pick any playlist from your library.
+
+### YouTube playlists
+
+Toggle **Show YouTube playlists** to include your YouTube Music playlists in the Android Auto browse menu alongside your local playlists.
+
+## Testing without a car
+
+<Tip>
+  You can test Android Auto without a physical head unit by enabling developer mode. On your phone, open the **Android Auto** app, tap the version number in the top bar several times to enable developer settings, then enable **Unknown sources** and launch phone-only mode from the developer options menu.
+</Tip>
+
+<Note>
+  Android Auto feature availability depends on your car model, head unit firmware, and the version of the Android Auto app installed on your phone. Not all browse or playback features are guaranteed to work on every setup.
+</Note>

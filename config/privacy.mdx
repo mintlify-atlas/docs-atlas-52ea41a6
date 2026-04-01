@@ -1,0 +1,79 @@
+---
+title: "Privacy"
+description: "Understand what data Metrolist stores locally, what leaves your device, and how to control your history."
+---
+
+<Note>
+  Metrolist does not collect or transmit any personal data beyond what is strictly required for its features to function. There is no telemetry, no analytics, and no advertising SDK in the app.
+</Note>
+
+Metrolist is fully open source under the GPL-3.0 license. You can inspect every line of code that runs on your device at the [Metrolist GitHub repository](https://github.com/MetrolistGroup/Metrolist).
+
+## What stays on your device
+
+All user data is stored locally in a [Room](https://developer.android.com/training/data-storage/room) database on your device:
+
+- **Listen history** — every song you play is recorded locally with a timestamp and play count.
+- **Search history** — queries you type in the search bar are saved locally to power search suggestions.
+- **Library data** — liked songs, playlists, albums, artists, and offline downloads.
+- **Account credentials** — if you sign in with a YouTube Music account, your session cookie is stored only on your device. It is never sent to any Metrolist server.
+
+## History controls
+
+Open **Settings → Privacy** to manage your stored history.
+
+### Listen history
+
+| Setting | What it does |
+|---------|-------------|
+| Pause listen history | Stops recording new plays. Existing history is preserved. |
+| Clear listen history | Permanently deletes all play history from the local database. |
+
+### Search history
+
+| Setting | What it does |
+|---------|-------------|
+| Pause search history | Stops saving new search queries. Existing history is preserved. |
+| Clear search history | Permanently deletes all saved search queries. |
+
+### Screenshot protection
+
+Enable **Disable screenshot** (under **Misc** in **Settings → Privacy**) to set the `FLAG_SECURE` window flag on the app. This prevents the app from appearing in the system recents thumbnail and blocks screenshot capture — useful if you share your device or use screen recording tools.
+
+## What leaves your device
+
+A small number of features require network requests to third-party services. The following table summarizes what is sent and to whom.
+
+| Feature | Data sent | Destination | Stored by recipient? |
+|---------|-----------|-------------|----------------------|
+| Music streaming | Video/audio ID, session cookie | YouTube Music (Google) | Per Google's privacy policy |
+| Lyrics fetch | Song title, artist, duration | LrcLib, KuGou, BetterLyrics, Paxsenix (depending on provider order) | No personal data sent |
+| Music recognition | Short audio sample (Shazam API) | Apple (Shazam) | Not stored |
+| Listen Together | Playback state (song ID, position, play/pause) | Metrolist relay server (metroserver) | Not stored |
+| AI lyrics translation | Lyrics text | Your chosen AI provider (OpenRouter, OpenAI, Mistral, etc.) | Per provider's privacy policy |
+
+### Music recognition
+
+The music recognizer in Metrolist records a short audio clip from your microphone and sends it to the Shazam API for identification. The clip is not stored after the request completes. No other data about your listening session is included in the request.
+
+### Listen Together
+
+The Listen Together feature synchronizes playback state between participants in real time. Only the current song ID, playback position, and play/pause state are transmitted through the Metrolist relay server. No account information, history, or personal data passes through this relay.
+
+### AI translation
+
+When you use AI lyrics translation, the lyrics text is sent to whichever AI provider you have configured. Metrolist does not proxy this request — it is sent directly from your device to the provider. Refer to your chosen provider's privacy policy for how they handle request data.
+
+## No ads, no tracking
+
+Metrolist contains no advertising SDKs, no crash reporting services, and no analytics libraries. Third-party dependencies used by the app are limited to open-source libraries for audio playback, image loading, and database access.
+
+## Using a proxy for regional content
+
+If you need to route Metrolist's YouTube Music requests through a proxy or VPN — for example, to access content not available in your region — you can configure a proxy directly in the app.
+
+Go to **Settings → Content → Proxy**, enable the proxy toggle, then tap **Configure proxy** to enter the proxy type (HTTP or SOCKS), host, port, and optional authentication credentials.
+
+<Card title="Regional restrictions" icon="earth-europe" href="/setup/regional-restrictions">
+  Learn more about using a VPN or proxy to access YouTube Music from restricted regions.
+</Card>

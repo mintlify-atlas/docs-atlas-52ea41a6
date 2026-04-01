@@ -1,0 +1,92 @@
+---
+title: "Backup & restore"
+description: "Export your library data to a backup file and restore it on another device or after a reinstall."
+---
+
+Metrolist stores your entire library locally on your device — songs, playlists, liked songs, listen history, and account credentials. The backup system lets you capture all of that in a single file and restore it whenever you need.
+
+## What gets backed up
+
+A Metrolist backup file (`.backup`) contains:
+
+- Your local library: liked songs, albums, and artists
+- All playlists and their contents
+- Listen history and play counts
+- Search history
+- App settings and preferences
+- YouTube Music account credentials (cookies), if you are signed in
+
+## Creating a backup
+
+<Steps>
+  <Step title="Open settings">
+    Tap the profile icon or open the drawer, then go to **Settings**.
+  </Step>
+  <Step title="Go to Backup & Restore">
+    Tap **Backup & Restore** in the settings list.
+  </Step>
+  <Step title="Tap Export backup">
+    Tap **Backup**. A system file picker opens and prompts you to choose a save location. The file is named `Metrolist_<timestamp>.backup` automatically.
+  </Step>
+  <Step title="Save the file">
+    Choose a folder — a cloud-synced location such as Google Drive or a local folder — and confirm. The backup is written immediately.
+  </Step>
+</Steps>
+
+<Tip>
+  Keep a copy of your backup in a cloud-synced folder so it survives device loss or factory resets.
+</Tip>
+
+## Restoring from a backup
+
+<Steps>
+  <Step title="Open Backup & Restore">
+    Go to **Settings → Backup & Restore**.
+  </Step>
+  <Step title="Tap Restore">
+    Tap **Restore**. A file picker opens — locate your `.backup` file and select it.
+  </Step>
+  <Step title="Review the confirmation dialog">
+    Metrolist shows a preview of the backup. If the backup contains account credentials, the app attempts to identify the associated Google account and displays its name and email. Review the details and tap **Restore** to confirm.
+  </Step>
+  <Step title="Restart the app">
+    After the restore completes, restart Metrolist. Your library, playlists, and history are restored.
+  </Step>
+</Steps>
+
+<Warning>
+  Restoring a backup can cause playback errors if the backup contains stale YouTube Music auth credentials. If you encounter playback failures after a restore, sign out of your account and sign back in to refresh your session. This was noted as a known issue fixed in v13.2.0, but old backup files created before that fix may still contain stale cookies.
+</Warning>
+
+## Importing playlists
+
+In addition to full backups, Metrolist supports importing playlists from external sources.
+
+<CardGroup cols={2}>
+  <Card title="M3U import" icon="list-music">
+    Tap **Import online** in **Settings → Backup & Restore** and select an `.m3u` or `.m3u8` file. Metrolist resolves each entry against YouTube Music and lets you save the result as a playlist.
+  </Card>
+  <Card title="CSV import" icon="table">
+    Tap **Import CSV** and select a `.csv` file. Metrolist shows a column-mapping dialog so you can tell it which columns contain the track title, artist, and album. A live progress view shows each track as it is matched.
+  </Card>
+</CardGroup>
+
+## Managing storage
+
+Metrolist maintains two caches that grow over time: a song cache for streaming audio and an image cache for artwork. Manage both from **Settings → Storage**.
+
+<AccordionGroup>
+  <Accordion title="Song cache">
+    Controls how much audio data Metrolist keeps on disk so recently streamed songs load faster. You can set the maximum size to 128 MB, 256 MB, 512 MB, 1 GB, 2 GB, 4 GB, 8 GB, or unlimited. Tap **Clear song cache** to free that space immediately. You can also disable the song cache entirely with the **Enable song cache** toggle.
+  </Accordion>
+  <Accordion title="Image cache">
+    Controls how much artwork Metrolist stores. Maximum sizes range from 128 MB to 8 GB. Tap **Clear image cache** to remove cached artwork. Artwork for downloaded songs is preserved automatically when you clear the image cache.
+  </Accordion>
+  <Accordion title="Downloaded songs">
+    Shows the total disk space used by your offline downloads. Tap **Clear all downloads** to remove all downloaded audio files. This does not delete the songs from your library — only the local audio files.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  Reducing the cache size limit below the current cache size triggers a confirmation dialog before Metrolist evicts data. Check the current usage shown by the progress bar in **Settings → Storage** before lowering the limit.
+</Note>

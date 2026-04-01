@@ -1,0 +1,88 @@
+---
+title: Translations
+description: Help translate Metrolist into your language using Weblate.
+---
+
+Metrolist uses [Weblate](https://hosted.weblate.org/projects/Metrolist/) for community-driven translations. Weblate provides a web-based editor where you can contribute without any knowledge of Android development or Git.
+
+<Tip>
+  Check the current translation progress for all languages at [hosted.weblate.org/engage/metrolist](https://hosted.weblate.org/engage/metrolist/).
+</Tip>
+
+## How to contribute a translation
+
+<Steps>
+  <Step title="Open the Weblate project">
+    Go to [hosted.weblate.org/projects/Metrolist](https://hosted.weblate.org/projects/Metrolist/) and sign in or create a free account.
+  </Step>
+
+  <Step title="Select your language">
+    Browse the list of available languages. If your language is not listed, you can request it to be added through the Weblate interface.
+  </Step>
+
+  <Step title="Translate strings">
+    Use the Weblate editor to translate strings. The editor shows the original English text alongside your translation and highlights any issues such as missing placeholders or inconsistent punctuation.
+  </Step>
+
+  <Step title="Submit your translations">
+    Weblate automatically creates pull requests to the Metrolist repository when translations are reviewed and approved. You do not need to open a pull request manually.
+  </Step>
+</Steps>
+
+<Note>
+  Do not edit locale files (such as `app/src/main/res/values-fr/metrolist_strings.xml`) directly in the repository. These files are managed by Weblate and will be overwritten during the next sync.
+</Note>
+
+## Adding new strings
+
+If you are contributing code that introduces new user-facing text, add the strings to the base English file first:
+
+```
+app/src/main/res/values/metrolist_strings.xml
+```
+
+<Warning>
+  Do **not** add strings to `strings.xml` or to any locale-specific `metrolist_strings.xml` file (e.g. `values-fr/metrolist_strings.xml`). Only the base file at `values/metrolist_strings.xml` should be edited by contributors. Translations are handled exclusively through Weblate.
+</Warning>
+
+Once new strings are merged into the `main` branch, Weblate picks them up automatically and makes them available for translators.
+
+## Translation file structure
+
+Locale-specific translations live in subdirectories named after the Android locale code:
+
+```
+app/src/main/res/
+├── values/
+│   └── metrolist_strings.xml        ← base English strings (edit this)
+├── values-fr/
+│   └── metrolist_strings.xml        ← French (managed by Weblate)
+├── values-de/
+│   └── metrolist_strings.xml        ← German (managed by Weblate)
+└── values-{locale}/
+    └── metrolist_strings.xml        ← other languages (managed by Weblate)
+```
+
+The locale code follows the Android resource naming convention (e.g. `values-zh-rCN` for Simplified Chinese, `values-pt-rBR` for Brazilian Portuguese).
+
+## Translation sync configuration
+
+The sync between the repository and Weblate is configured in `crowdin.yml` at the repository root:
+
+```yaml crowdin.yml
+files:
+  - source: /app/src/main/res/values/strings.xml
+    translation: /app/src/main/res/values-%android_code%/strings.xml
+```
+
+The `%android_code%` placeholder is expanded to the appropriate locale code for each language during sync.
+
+<Note>
+  The crowdin.yml references `strings.xml` for legacy sync compatibility. New user-facing strings contributed by developers must be added to `metrolist_strings.xml` (as described above). Translators work only through Weblate and do not need to worry about this distinction.
+</Note>
+
+## Supported languages
+
+Weblate hosts the full and up-to-date list of supported languages along with their completion percentages. Visit the [Metrolist Weblate project](https://hosted.weblate.org/projects/Metrolist/) to see which languages are available and how complete each one is.
+
+Every translation makes Metrolist more accessible to someone, somewhere in the world. Even partial translations are welcome — translators can build on each other's work over time.

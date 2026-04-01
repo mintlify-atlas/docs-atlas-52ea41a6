@@ -1,0 +1,107 @@
+---
+title: "AI settings"
+description: "Configure an AI provider to translate and romanize lyrics directly in Metrolist."
+---
+
+Metrolist can translate lyrics into any target language and romanize non-Latin scripts using an AI provider of your choice. All AI features are opt-in and require you to supply your own API key.
+
+<Note>
+  AI features are not free. You need an API key from your chosen provider. Most providers offer a free tier with limited monthly credits — check your provider's pricing page before getting started.
+</Note>
+
+## Supported providers
+
+Metrolist supports the following AI providers out of the box:
+
+<CardGroup cols={2}>
+  <Card title="OpenRouter" icon="route">
+    A unified API gateway that routes requests to hundreds of models. The default provider. Includes access to Google Gemini, OpenAI GPT, DeepSeek, Meta Llama, xAI Grok, and more through a single API key.
+  </Card>
+  <Card title="OpenAI" icon="microchip">
+    Direct access to GPT models including `gpt-4o-mini`, `gpt-4o`, and `gpt-4-turbo`.
+  </Card>
+  <Card title="Google Gemini" icon="gem">
+    Direct access to Gemini Flash and Gemini Flash Lite models via Google's OpenAI-compatible endpoint.
+  </Card>
+  <Card title="Anthropic Claude" icon="circle-c">
+    Direct access to Claude models including `claude-opus-4-6`, `claude-sonnet-4-6`, and `claude-haiku-4-5`.
+  </Card>
+  <Card title="Mistral AI" icon="wind">
+    Direct access to Mistral Large, Medium, Small, and Tiny models. Added in v13.3.0.
+  </Card>
+  <Card title="Perplexity" icon="magnifying-glass">
+    Access to Perplexity Sonar models including `sonar`, `sonar-pro`, and `sonar-reasoning`.
+  </Card>
+  <Card title="xAI (Grok)" icon="x">
+    Direct access to Grok models including `grok-4-1-fast` and `grok-vision-beta`.
+  </Card>
+  <Card title="DeepL" icon="language">
+    A dedicated neural machine translation API. Does not use a chat model — no system prompt customization applies. Supports a formality setting (default / more formal / less formal).
+  </Card>
+</CardGroup>
+
+You can also select **Custom** to point Metrolist at any OpenAI-compatible endpoint by entering a base URL manually.
+
+## Configuration
+
+<Steps>
+  <Step title="Open AI settings">
+    Go to **Settings → AI**.
+  </Step>
+  <Step title="Select a provider">
+    Tap **AI provider** and choose from the list. The base URL is set automatically for all built-in providers. If you select **Custom**, you must enter the base URL manually.
+  </Step>
+  <Step title="Enter your API key">
+    Tap **API key** and paste your key. For DeepL, tap **DeepL API key** instead. The key is stored only on your device.
+  </Step>
+  <Step title="Choose a model">
+    Tap **Model** and select from the preset list for your provider, or choose **Custom** to type in any model identifier your provider supports.
+  </Step>
+  <Step title="Set your target language">
+    Tap **Target language** and select the language you want lyrics translated into.
+  </Step>
+</Steps>
+
+<Warning>
+  Your API key is stored in the app's local shared preferences on your device. It is never sent to any Metrolist server — it is only included in requests sent directly from your device to your chosen AI provider. Treat it like a password: do not share your backup file with others if it contains an API key.
+</Warning>
+
+## Translation modes
+
+For providers other than DeepL, you can choose how the AI approaches translation.
+
+<CardGroup cols={2}>
+  <Card title="Literal" icon="book-open">
+    Translates the lyric text as written. Preserves the original meaning and phrasing as closely as possible. Best for understanding what a song says.
+  </Card>
+  <Card title="Transcribed" icon="music">
+    Adapts the translation to match the syllable count and flow of the original so it could be sung. Best for karaoke-style use.
+  </Card>
+</CardGroup>
+
+## Customizing the AI prompt
+
+Metrolist sends a system prompt to the AI that instructs it how to translate. As of v13.4.0, you can replace this prompt with your own.
+
+Go to **Settings → AI → System prompt** and edit the text. If you want to revert to the built-in default, tap **Reset to default** in the dialog.
+
+<Tip>
+  Custom prompts are useful if you want to enforce a specific tone, request phonetic transliterations alongside translations, or instruct the model to preserve certain words untranslated (such as proper nouns).
+</Tip>
+
+## DeepL-specific settings
+
+When DeepL is selected as the provider, the model selector and translation mode options are hidden. Instead, you can configure:
+
+- **DeepL API key** — your DeepL authentication key
+- **Formality** — choose between **Default**, **More formal**, or **Less formal** to control the register of the translated output
+
+## Using translation in the lyrics view
+
+Once AI is configured, open the lyrics panel while a song is playing and tap the **translate** icon. Metrolist sends the current lyrics to your configured provider and displays the translation inline.
+
+For full usage instructions — including romanization and switching between the original and translated text — see the lyrics translation guide.
+
+<Card title="Lyrics translation" icon="language" href="/guide/lyrics-translation">
+  Learn how to trigger translation and romanization from the lyrics view.
+</Card>

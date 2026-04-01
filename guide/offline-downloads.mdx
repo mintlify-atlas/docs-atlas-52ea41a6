@@ -1,0 +1,84 @@
+---
+title: "Offline downloads"
+description: "Download songs to your device for offline playback. Metrolist also automatically caches recently played songs so you can listen without an internet connection."
+---
+
+## Downloading a song
+
+You can download any song directly from the app. Downloads are stored locally on your device using ExoPlayer's `DownloadManager`, with up to three songs downloading in parallel.
+
+<Steps>
+  <Step title="Find the song">
+    Search for a song, or browse your library, an album, or a playlist.
+  </Step>
+  <Step title="Open the song menu">
+    Long-press the song row, or tap the three-dot menu icon next to it.
+  </Step>
+  <Step title="Tap Download">
+    Select **Download** from the context menu. The download starts immediately in the background.
+  </Step>
+  <Step title="Monitor progress">
+    A download progress indicator appears next to the song while it is in progress. The indicator disappears and the song is marked as downloaded when complete.
+  </Step>
+</Steps>
+
+<Note>
+  Downloads are stored locally and tied to this device. They are not synced across devices or to any cloud storage. If you uninstall Metrolist or clear the app's storage, all downloaded files are removed.
+</Note>
+
+## Accessing downloaded songs
+
+Downloaded songs appear in **Library → Downloads**. This is a persistent playlist that automatically includes every song that has been fully downloaded.
+
+You can play, shuffle, or add any downloaded song to a queue from this screen — no internet connection required.
+
+## Automatic song cache
+
+Metrolist automatically caches every song you play using ExoPlayer's `SimpleCache` (the player cache). Starting with v13.4.0, cached songs are treated as offline songs — they appear in **Library → Downloads** alongside explicitly downloaded tracks and play back without a network connection.
+
+<Info>
+  The difference between a **download** and a **cached song** is permanence. Downloads are kept indefinitely until you remove them. Cached songs may be evicted when the cache reaches its size limit, freeing up space for newer content.
+</Info>
+
+## Storage management
+
+Go to **Settings → Storage** to manage how much space Metrolist uses.
+
+<CardGroup cols={2}>
+  <Card title="Cache size limit" icon="hard-drive">
+    Set the maximum size of the automatic song cache. When the limit is reached, older cached songs are evicted to make room.
+  </Card>
+  <Card title="Clear cache" icon="trash">
+    Remove all automatically cached songs immediately. Explicitly downloaded songs are not affected.
+  </Card>
+  <Card title="Clear downloads" icon="cloud-off">
+    Remove all downloaded songs from local storage.
+  </Card>
+  <Card title="View storage usage" icon="chart-pie">
+    See how much storage the player cache and download cache each occupy.
+  </Card>
+</CardGroup>
+
+## Download quality
+
+Downloads use the same **Audio quality** setting as streaming. Go to **Settings → Player → Audio quality** to choose:
+
+- **Auto** — selects the best format available (default)
+- **High** — always downloads the highest available bitrate
+- **Low** — downloads a smaller, lower-bitrate file to save storage
+
+See [Audio settings](/config/audio-settings) for more detail on audio format options.
+
+## Auto-download on like
+
+Metrolist can automatically download a song whenever you like it. Enable this under **Settings → Player & Audio → Auto-download on like**.
+
+## How offline mode works
+
+When your device has no internet connection, Metrolist automatically plays songs from the download cache or the player cache instead of streaming. No manual mode switch is required — if a local copy exists, it is used.
+
+<Warning>
+  Songs that have not been downloaded or recently cached require an internet connection to play. Attempting to play them while offline will result in a playback error.
+</Warning>
+
+Songs that cannot be resolved because of a missing internet connection will show an error in the queue. If **Auto-skip on error** is enabled (under **Settings → Player & Audio → Auto-skip on error**), Metrolist automatically skips them and continues with the next available track.

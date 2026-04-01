@@ -1,0 +1,115 @@
+---
+title: "Lyrics"
+description: "View synced and unsynced lyrics while listening, jump to any line, copy lyrics, and customize the look."
+---
+
+Metrolist fetches lyrics automatically when you open the player. Tap the **lyrics icon** (bottom-right of the player screen) to show the lyrics panel. Tap the icon again, or swipe down, to dismiss it.
+
+## Synced vs. unsynced lyrics
+
+<CardGroup cols={2}>
+  <Card title="Synced lyrics" icon="align-left">
+    Each line (or word) is timed to the audio. The current line is highlighted and the view scrolls to follow along as the song plays.
+  </Card>
+  <Card title="Unsynced lyrics" icon="file-lines">
+    Plain text with no timestamps. Shown as a fallback when no synced version is available from any provider.
+  </Card>
+</CardGroup>
+
+### Live word-by-word highlighting
+
+When a provider returns **rich sync** format — word-level timestamps embedded in the LRC data — Metrolist highlights each individual word as it is sung. This works for tracks from BetterLyrics, Paxsenix, and other providers that supply the `<MM:SS.mm>word` format.
+
+## Lyrics providers
+
+Metrolist queries multiple providers and returns the first successful result. The default order is:
+
+<AccordionGroup>
+  <Accordion title="BetterLyrics">
+    A dedicated lyrics service with rich sync support, including word-by-word and multi-voice (agent/background) metadata. Enabled by default and tried first. Can be individually disabled in **Settings → Content**.
+  </Accordion>
+  <Accordion title="Paxsenix">
+    Supplies rich sync lyrics with agent (`v1:`, `v2:`) and background (`[bg: …]`) vocal parts. Supports duet and multi-singer songs with proper left/right positioning when agent positioning is enabled.
+  </Accordion>
+  <Accordion title="LrcLib">
+    A large open, community-curated LRC database. Returns standard synced LRC or plain-text lyrics. Good coverage for mainstream and independent releases.
+  </Accordion>
+  <Accordion title="KuGou">
+    A Chinese music platform with an extensive synced lyrics library. Particularly strong coverage for C-pop, K-pop, and J-pop.
+  </Accordion>
+  <Accordion title="LyricsPlus (SimpMusic)">
+    Lyrics sourced through the LyricsPlus provider from SimpMusic, offering additional coverage for tracks not found elsewhere.
+  </Accordion>
+  <Accordion title="YouTube subtitles">
+    Auto-generated or human-uploaded subtitle tracks attached to the YouTube video. Timed to the video, but accuracy varies.
+  </Accordion>
+  <Accordion title="YouTube lyrics">
+    The lyrics panel served directly by YouTube Music for the track. Plain or lightly synced. Used as a last-resort fallback.
+  </Accordion>
+</AccordionGroup>
+
+## Provider priority
+
+Metrolist tries providers **in order**, returning the first result that succeeds. You can reorder or disable individual providers in **Settings → Content → Lyrics provider order**.
+
+The configurable order is stored as a comma-separated list internally (e.g., `BetterLyrics,Paxsenix,LrcLib,KuGou,LyricsPlus,YouTubeSubtitle,YouTube`). Dragging providers in the settings UI updates this list. If a provider is disabled, it is skipped entirely even if it would otherwise be first in the list.
+
+<Note>
+  The legacy **Preferred provider** setting (single-choice) is still respected for backward compatibility, but the new per-provider ordering takes precedence when configured.
+</Note>
+
+## Interacting with lyrics
+
+### Jump to a line
+
+Tap any lyric line to seek the song to that timestamp. This requires **Lyrics click** to be enabled — it is on by default. You can toggle it in **Settings → Appearance → Lyrics → Lyrics click**.
+
+### Auto-scroll
+
+The lyrics view automatically scrolls to keep the current line visible. You can disable this in **Settings → Appearance → Lyrics → Auto-scroll**.
+
+When auto-scroll is active, manually dragging the list pauses automatic scrolling until the song advances to the next line.
+
+### Copy lyrics
+
+Tap the **copy** button in the lyrics panel to copy all lyrics text to your clipboard. This was added in v13.4.0.
+
+## Appearance settings
+
+Open **Settings → Appearance → Lyrics** to customize the lyrics display.
+
+<CardGroup cols={2}>
+  <Card title="Text position" icon="align-center">
+    Choose **Left**, **Center**, or **Right** alignment for lyrics text.
+  </Card>
+  <Card title="Text size" icon="text-size">
+    Slider from 12 sp to 48 sp. Default is 24 sp.
+  </Card>
+  <Card title="Line spacing" icon="arrows-up-down">
+    Multiplier from 1.0 to 3.0. Default is 1.2×.
+  </Card>
+  <Card title="Animation style" icon="wand-magic-sparkles">
+    Controls how the active line is highlighted. Choose from **None**, **Fade**, **Glow**, **Slide**, **Karaoke**, or **Apple**.
+  </Card>
+  <Card title="Glow effect" icon="sun">
+    Adds a soft glow behind the active lyric line. Toggle on or off independently of the animation style.
+  </Card>
+  <Card title="Agent positioning" icon="users">
+    For multi-singer tracks, respects the left/right positioning metadata embedded by Paxsenix and compatible providers.
+  </Card>
+</CardGroup>
+
+### Animation style reference
+
+| Style | Behavior |
+|-------|----------|
+| None | No animation — active line is highlighted instantly |
+| Fade | The active line fades in/out |
+| Glow | Active line glows brighter |
+| Slide | Active line slides into position |
+| Karaoke | Color sweeps across the active line in sync with word timing |
+| Apple | Smooth scale and opacity transition inspired by Apple Music |
+
+<Tip>
+  For the most immersive experience, try the **Karaoke** or **Apple** animation style with the **glow effect** enabled. Adjust text size and line spacing to taste in **Settings → Appearance → Lyrics**.
+</Tip>

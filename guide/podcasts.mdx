@@ -1,0 +1,104 @@
+---
+title: "Podcasts"
+description: "Browse, subscribe to, and play podcast episodes through Metrolist's full podcast library support."
+---
+
+Metrolist added full podcast library support in v13.2.0. You can save podcast shows, browse episodes, subscribe to channels, and play episodes just like songs — including background playback and downloading for offline listening.
+
+<Note>
+  Podcast content is served by YouTube Music. An active connection to YouTube Music is required to load new episodes and show details. Downloaded episodes are available offline.
+</Note>
+
+## Finding podcasts
+
+<CardGroup cols={2}>
+  <Card title="Search" icon="magnifying-glass">
+    Use the main search bar and search for a podcast name. Switch to the **Podcasts** result tab if one appears, or tap a podcast show result to open its episode list.
+  </Card>
+  <Card title="Explore" icon="compass">
+    Browse the **Explore** section from the home screen to discover trending and featured podcasts from YouTube Music.
+  </Card>
+</CardGroup>
+
+## Saving a podcast to your library
+
+When you open a podcast show page, tap the **Save** button (bookmark icon) to add it to your library. Saved podcasts appear in **Library → Podcasts → Episodes** tab under your subscribed shows.
+
+The podcast is stored in the local `podcast` database table. The `bookmarkedAt` field is set when you save it, and cleared when you remove it. Metrolist syncs saves and removals with YouTube Music using the `likePlaylist` API.
+
+## Subscribing to a podcast channel
+
+In addition to saving a podcast show, you can subscribe to the podcast's YouTube Music channel (added in v13.3.0). Subscribed channels appear in **Library → Podcasts → Channels** tab.
+
+<Steps>
+  <Step title="Open a podcast show page">
+    Search for or browse to a podcast and tap it to open the show page.
+  </Step>
+  <Step title="Subscribe to the channel">
+    Tap the **Subscribe** button on the show page. This follows the podcast's host channel on YouTube Music.
+  </Step>
+  <Step title="View subscribed channels">
+    Go to **Library → Podcasts** and tap the **Channels** chip to see all channels you have subscribed to. Tap any channel to open its artist page on YouTube Music.
+  </Step>
+</Steps>
+
+## The Podcasts screen
+
+Tap **Podcasts** in the Library filter chips to open the podcast section. It has three sub-filters:
+
+<Tabs>
+  <Tab title="Episodes">
+    Shows two automatic playlists at the top — **New Episodes** (your RDPN feed from YouTube Music) and **Episodes for Later** (your saved episodes queue) — followed by a list of podcast shows you have saved to your library. Tap any show to open its full episode list.
+  </Tab>
+  <Tab title="Channels">
+    Shows the podcast host channels you have subscribed to. Each entry displays the channel avatar and name. Tap a channel to open its YouTube Music artist page. If you have no subscriptions, a "No subscribed channels" message is shown.
+  </Tab>
+  <Tab title="Downloaded">
+    Shows all podcast episodes you have downloaded to your device. You can sort downloaded episodes by date added, name, artist, or play time. A shuffle FAB appears when you have at least one downloaded episode.
+  </Tab>
+</Tabs>
+
+Pull down on any tab to refresh podcast data from YouTube Music.
+
+## Playing podcast episodes
+
+Playing an episode works the same way as playing a song:
+
+- **Tap an episode** in a show's episode list to start playback and queue the remaining episodes.
+- **Tap a downloaded episode** in the Downloaded tab to play it from device storage.
+- Playback resumes from where you left off — the `playbackPosition` field in the database tracks your position per episode.
+- Background playback, sleep timer, and all other player features work with podcast episodes.
+
+## Downloading episodes
+
+Long-press any episode or tap **⋮** and select **Download**. Downloaded episodes appear in the **Downloaded** tab of the Podcasts screen and can be played without an internet connection.
+
+## Pinning a podcast to speed dial
+
+You can pin any saved podcast show to speed dial for quick access from the home screen.
+
+<Steps>
+  <Step title="Open the Podcasts Episodes tab">
+    Go to **Library → Podcasts → Episodes**.
+  </Step>
+  <Step title="Tap ⋮ on a podcast show">
+    Tap the three-dot menu next to any saved podcast show.
+  </Step>
+  <Step title="Tap Pin to speed dial">
+    Select **Pin to speed dial**. The podcast is stored in the `speed_dial_item` table with `type = "PLAYLIST"`.
+  </Step>
+</Steps>
+
+To unpin, tap **⋮** on the same show and select **Unpin from speed dial**.
+
+## Removing a podcast from your library
+
+Tap **⋮** on any saved podcast show in the Episodes tab and select **Remove from library**. This clears the `bookmarkedAt` field locally and calls the YouTube Music API to unsave the podcast. It does not unsubscribe you from the channel.
+
+## Logged-out users
+
+Podcast browsing and playback work even when you are not logged in to a YouTube Music account. This was fixed in v13.3.0. You can search for and play podcasts, save episodes for later, and download episodes without an account.
+
+<Info>
+  When not logged in, saves and subscriptions are stored only on your device and are not synced to YouTube Music.
+</Info>

@@ -1,0 +1,133 @@
+---
+title: "Listen Together"
+description: "Create a real-time listening room and sync playback with friends anywhere in the world — song changes, seek position, and play/pause all stay in lockstep."
+---
+
+Listen Together lets you host or join a shared listening session with other Metrolist users. The host controls playback; guests stay in sync automatically. Song changes, seek actions, play, and pause are all broadcast to every participant in real time.
+
+<Note>
+  All participants must have Metrolist installed on their Android device. Listen Together is not available through a web browser or other clients.
+</Note>
+
+## Opening Listen Together
+
+Tap the **Listen Together** button in the top bar of the app to open the session screen. If you do not see the button, go to **Settings → Appearance** and enable the Listen Together button in the top bar option.
+
+## Starting or joining a session
+
+<Tabs>
+  <Tab title="Create a room (host)">
+    <Steps>
+      <Step title="Connect to the server">
+        On the Listen Together screen, tap **Connect**. Metrolist establishes a WebSocket connection to the metroserver backend. The status indicator turns green when connected.
+      </Step>
+      <Step title="Enter your username">
+        Type the name other participants will see for you in the session.
+      </Step>
+      <Step title="Create the room">
+        Tap **Create room**. A unique 8-character room code is generated and copied to your clipboard automatically. Your playback is now being broadcast to all guests who join.
+      </Step>
+      <Step title="Share the code or link">
+        Inside the room, tap **Copy code** to share the room code, or tap **Copy link** to share an invite link in the format `https://metrolist.meowery.eu/listen?code=XXXXXXXX`. Guests can join using either.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Join a room (guest)">
+    <Steps>
+      <Step title="Connect to the server">
+        On the Listen Together screen, tap **Connect** and wait for the green connected status.
+      </Step>
+      <Step title="Enter your username and room code">
+        Type your display name and the 8-character room code shared by the host.
+      </Step>
+      <Step title="Send join request">
+        Tap **Join room**. Your request is sent to the host for approval. If the host has auto-approval enabled, you join immediately. Otherwise, wait for the host to accept.
+      </Step>
+      <Step title="Sync to host">
+        Once approved, Metrolist loads the host's current track, queue, and playback position. You are now in sync.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## What syncs
+
+<CardGroup cols={2}>
+  <Card title="Track changes" icon="arrow-right-arrow-left">
+    When the host changes to a different song, all guests load and begin buffering the same track. Playback starts once buffering completes.
+  </Card>
+  <Card title="Play and pause" icon="circle-play">
+    Host play/pause actions are broadcast instantly. Guests apply the state change with a position adjustment to compensate for latency.
+  </Card>
+  <Card title="Seek position" icon="clock-rotate-left">
+    When the host seeks, guests seek to the same position. Small drifts below 2 seconds are ignored to avoid interrupting active playback.
+  </Card>
+  <Card title="Queue" icon="list">
+    The host's full playback queue is sent to guests on join and kept in sync as tracks are added, removed, or reordered.
+  </Card>
+</CardGroup>
+
+## Guest restrictions
+
+While you are in a room as a guest, you cannot control your own playback independently. Play, pause, seek, and skip actions are blocked — only the host's actions take effect. This restriction is lifted automatically when you leave the room.
+
+## Song requests
+
+Guests can suggest songs to the host. The host sees pending suggestions in the session view and can approve or reject each one individually.
+
+To skip manual approval, the host can enable **Auto-approve song requests** in **Settings → Integrations → Listen Together**. With this on, guest suggestions are added to the queue automatically. Added in v13.2.0.
+
+## Managing the room (host only)
+
+As host, you can tap any connected user's avatar to open a moderation menu:
+
+- **Kick** — removes the user from the room immediately
+- **Block** — kicks the user and adds them to a blocked list so they cannot rejoin
+- **Transfer ownership** — promotes the user to host and demotes you to guest
+
+Blocked usernames are managed in **Settings → Integrations → Listen Together → Blocked users**.
+
+## Leaving a room
+
+Tap **Leave room** at the bottom of the session screen. Your playback continues independently after leaving, and your previous mute state is restored.
+
+## Settings
+
+Go to **Settings → Integrations → Listen Together** to configure:
+
+<AccordionGroup>
+  <Accordion title="Server">
+    Metrolist connects to the **The Meowery** server (Poland) by default (`wss://metroserverx.meowery.eu/ws`). You can switch to a different community server or enter a custom WebSocket URL if you are self-hosting metroserver.
+  </Accordion>
+  <Accordion title="Username">
+    Set a default display name so you do not have to type it every time you join a session.
+  </Accordion>
+  <Accordion title="Auto-approve joins">
+    When enabled, join requests from other users are accepted automatically without requiring manual host approval.
+  </Accordion>
+  <Accordion title="Auto-approve song suggestions">
+    When enabled, song suggestions from guests are added to your queue without a confirmation prompt.
+  </Accordion>
+  <Accordion title="Sync host volume">
+    When enabled as a guest, your playback volume is adjusted to match the host's volume level.
+  </Accordion>
+</AccordionGroup>
+
+For related integration settings, see [Integrations](/config/lastfm) in the Configuration section.
+
+## Technical details
+
+<AccordionGroup>
+  <Accordion title="Protocol">
+    Listen Together uses Protocol Buffers (protobuf) serialized over a WebSocket connection to the metroserver backend. Migrated from JSON to protobuf in v13.2.0 to reduce message size and lower latency.
+  </Accordion>
+  <Accordion title="Sync debouncing">
+    To avoid choppy audio, guests apply a 1-second debounce on rapid sync events and only seek when the position difference exceeds 2 seconds during active playback (3 seconds while playing). Fixed in v13.4.0.
+  </Accordion>
+  <Accordion title="Reconnection">
+    If a participant loses their connection, Metrolist attempts automatic reconnection. Guests re-sync to the host's current state on reconnect; the host re-sends the current track and play position if the server's state has drifted.
+  </Accordion>
+  <Accordion title="Open source backend">
+    The server component is metroserver, an open source real-time backend. You can self-host it and point Metrolist to your own WebSocket URL in the server settings.
+  </Accordion>
+</AccordionGroup>

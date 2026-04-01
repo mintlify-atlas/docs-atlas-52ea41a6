@@ -1,0 +1,108 @@
+---
+title: "Discord Rich Presence"
+description: "Show your currently playing track in your Discord status using Metrolist's built-in Rich Presence integration."
+---
+
+## What is Discord Rich Presence?
+
+Discord Rich Presence lets other users see what you are doing directly on your Discord profile. When enabled in Metrolist, your Discord status shows the song you are currently listening to, including the track title, artist, album art, and a progress bar.
+
+The integration is built on [Kizzy](https://github.com/dead8309/Kizzy), an open-source Android library for Discord Rich Presence.
+
+<Warning>
+  This integration requires your Discord account token. Metrolist uses it only to update your presence via Discord's gateway. Review the in-app warning before connecting, as using user tokens with third-party apps falls outside Discord's Terms of Service.
+</Warning>
+
+## Prerequisites
+
+Discord must be installed and you must be logged into your account. The Discord app does **not** need to be running in the foreground, but it must be installed on the **same device** as Metrolist. A presence set on your phone is not reflected on a separate desktop session.
+
+<Note>
+  Discord Rich Presence is pushed directly from the device. If you are logged into Discord on multiple devices, the presence shown on your profile will be the one from the last connected device.
+</Note>
+
+## Connecting your Discord account
+
+There are two ways to log in, depending on your preference.
+
+### Standard login (recommended)
+
+<Steps>
+  <Step title="Open Settings">
+    Tap the **Settings** icon in the navigation bar.
+  </Step>
+  <Step title="Go to Integrations → Discord">
+    Navigate to **Integrations** and tap **Discord**.
+  </Step>
+  <Step title="Tap Login">
+    Tap the **Login** button in the account card. A Discord login page opens inside an in-app browser.
+  </Step>
+  <Step title="Sign in to Discord">
+    Enter your Discord email and password and complete any two-factor authentication steps. Once logged in, Metrolist automatically extracts your session token and closes the browser.
+  </Step>
+</Steps>
+
+### Advanced login (token)
+
+If you already have your Discord token, tap **Advanced login** and paste it directly into the token field. Metrolist verifies the token against Discord's API before saving it.
+
+## What appears in your Discord status
+
+Once connected and enabled, your Discord profile shows:
+
+- **Activity label** — defaults to "Listening to Metrolist" (configurable)
+- **Song title** — the currently playing track
+- **Artist** — the track's artist
+- **Album art** — the track thumbnail as the large image; the artist thumbnail as a small overlay
+- **Progress bar** — elapsed time and total duration
+- **Buttons** — up to two action buttons (defaults: "Listen on YouTube Music" and "Visit Metrolist")
+
+A live preview of how your Rich Presence will look is shown at the bottom of the **Discord** settings screen, updating in real time as music plays.
+
+## Enabling Rich Presence
+
+After connecting your account, enable Rich Presence under **Settings → Integrations → Discord → Options**.
+
+| Option | Description |
+|---|---|
+| Enable Discord RPC | Turns Rich Presence on or off |
+| Use Details | Shows additional track detail in the presence payload |
+| Advanced mode | Unlocks additional customization options |
+
+## Advanced customization
+
+Enable **Advanced mode** to access the full set of presence options.
+
+### Presence
+
+<AccordionGroup>
+  <Accordion title="Status">
+    Set your Discord online status while Metrolist is active. Options are **Online**, **Idle**, and **Do Not Disturb**.
+  </Accordion>
+  <Accordion title="Activity type">
+    Controls how the activity is phrased on your profile. Options are **Listening**, **Playing**, **Watching**, and **Competing**.
+  </Accordion>
+  <Accordion title="Activity name">
+    Overrides the activity label shown above your presence card. Leave blank to use the default ("Listening to Metrolist" or the equivalent for the selected activity type).
+  </Accordion>
+</AccordionGroup>
+
+### Buttons
+
+You can show up to two buttons on your presence card. Each button has a label and can be toggled on or off independently.
+
+| Button | Default label |
+|---|---|
+| Button 1 | Listen on YouTube Music |
+| Button 2 | Visit Metrolist |
+
+Button labels support dynamic variables that are resolved at playback time. Refer to the hint shown inside the button text dialog for the available variable names.
+
+## Disconnecting your account
+
+To remove your Discord account from Metrolist:
+
+1. Go to **Settings → Integrations → Discord**.
+2. Tap **Sign out** in the account card.
+
+Your token and profile data (username, display name, avatar) are cleared immediately from the device.

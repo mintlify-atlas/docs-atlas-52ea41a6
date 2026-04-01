@@ -1,0 +1,148 @@
+---
+title: "Player settings"
+description: "Configure queue behavior, playback history, display options, error handling, and Google Cast support."
+---
+
+Player settings control how Metrolist manages your queue, records your listening history, and behaves across sessions. You can find all of these options under **Settings → Player & Audio**.
+
+## Queue behavior
+
+<AccordionGroup>
+  <Accordion title="Persistent queue" defaultOpen={true}>
+    When enabled (default), Metrolist saves your current queue to disk and restores it automatically the next time you open the app. Disabling this means the queue is cleared whenever the app is restarted.
+
+    | Default | Preference key |
+    |---|---|
+    | On | `persistentQueue` |
+  </Accordion>
+
+  <Accordion title="Auto-load more">
+    When the queue runs out of tracks, Metrolist automatically fetches related tracks from YouTube Music and appends them. This keeps playback going without manual action.
+
+    | Default | Preference key |
+    |---|---|
+    | On | `autoLoadMore` |
+  </Accordion>
+
+  <Accordion title="Disable auto-load when Repeat All is active">
+    Suppresses auto-loading when the player is set to Repeat All mode. With Repeat All on, the queue loops indefinitely and additional tracks are usually not wanted.
+
+    | Default | Preference key |
+    |---|---|
+    | Off | `disableLoadMoreWhenRepeatAll` |
+  </Accordion>
+
+  <Accordion title="Similar content">
+    Controls whether Metrolist uses YouTube Music's "similar content" recommendations when auto-loading more tracks. Disable this if you want auto-loaded tracks to come from a more direct continuation instead.
+
+    | Default | Preference key |
+    |---|---|
+    | On | `similarContent` |
+  </Accordion>
+
+  <Accordion title="Prevent duplicate tracks in queue">
+    When enabled, Metrolist blocks the same track from appearing more than once in the queue at a time. If a duplicate is detected when adding a song, it is not added again.
+
+    | Default | Preference key |
+    |---|---|
+    | Off | `preventDuplicateTracksInQueue` |
+  </Accordion>
+
+  <Accordion title="Persistent shuffle across queues">
+    When enabled, the shuffle state is carried over when the active queue changes — for example, when you start playing a new playlist. The shuffle mode you had active continues into the new queue.
+
+    | Default | Preference key |
+    |---|---|
+    | Off | `persistentShuffleAcrossQueues` |
+  </Accordion>
+
+  <Accordion title="Shuffle playlist first">
+    When enabled, opening a playlist in shuffle mode shuffles the playlist's tracks before starting playback, rather than playing from the first track and shuffling subsequent picks.
+
+    | Default | Preference key |
+    |---|---|
+    | Off | `shufflePlaylistFirst` |
+  </Accordion>
+</AccordionGroup>
+
+## Playback behavior
+
+<AccordionGroup>
+  <Accordion title="Remember shuffle and repeat" defaultOpen={true}>
+    When enabled (default), Metrolist saves your shuffle and repeat mode choices and restores them the next time you open the app. Disabling this resets both modes to their defaults on each launch.
+
+    | Default | Preference key |
+    |---|---|
+    | On | `rememberShuffleAndRepeat` |
+  </Accordion>
+
+  <Accordion title="Auto-skip next on error">
+    When a track fails to load or play — for example because it is unavailable in your region — Metrolist automatically skips to the next track in the queue instead of stopping.
+
+    | Default | Preference key |
+    |---|---|
+    | Off | `autoSkipNextOnError` |
+  </Accordion>
+
+  <Accordion title="Stop music when app is removed from recents">
+    When enabled, Metrolist stops playback and releases the media session when you swipe the app away from the Android recents screen. By default, playback continues in the background after the app is dismissed.
+
+    | Default | Preference key |
+    |---|---|
+    | Off | `stopMusicOnTaskClear` |
+  </Accordion>
+
+  <Accordion title="Extra seek seconds">
+    Adds extra seconds to the standard seek-forward and seek-backward buttons in the player. Enable this if you prefer longer jumps when scrubbing through a track.
+
+    | Default | Preference key |
+    |---|---|
+    | Off | `seekExtraSeconds` |
+  </Accordion>
+</AccordionGroup>
+
+## History
+
+### History duration
+
+Controls how many seconds a song must have played before Metrolist counts it as "played" in your listening history and statistics. Use the slider to set a value between **1** and **100** seconds.
+
+| Default | Preference key |
+|---|---|
+| 30 seconds | `historyDuration` |
+
+<Tip>
+  If you frequently skip tracks early, set the history duration to a low value so that brief listens do not pollute your play count statistics.
+</Tip>
+
+### Auto-download on like
+
+When enabled, Metrolist automatically starts a download whenever you like a song. This is useful if you want your liked songs available offline without manually queuing each download.
+
+| Default | Preference key |
+|---|---|
+| Off | `autoDownloadOnLike` |
+
+## Display
+
+### Keep screen on during playback
+
+When enabled, Metrolist prevents the screen from turning off while the expanded player is visible. The screen will dim and lock normally when the player is minimized or the app is backgrounded.
+
+| Default | Preference key |
+|---|---|
+| Off | `keepScreenOn` |
+
+## Google Cast
+
+<Note>
+  Google Cast is only available in the **GMS build** of Metrolist. It is not present in the FOSS (F-Droid) build variant. The Cast setting does not appear in the settings screen when running the FOSS build (`BuildConfig.CAST_AVAILABLE` is `false`).
+</Note>
+
+When running the GMS build, you can enable or disable Google Cast support. Enabling Cast adds a Cast button to the player toolbar when a Cast-compatible device is available on your network.
+
+| Setting | Default | Preference key |
+|---|---|---|
+| Enable Google Cast | On (GMS only) | `enableGoogleCast` |
+
+Disabling this preference removes the Cast button and stops Metrolist from scanning for Cast receivers. This can be useful if you do not own a Cast device and want to avoid unnecessary network activity.

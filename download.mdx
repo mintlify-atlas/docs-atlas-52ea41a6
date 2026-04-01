@@ -1,0 +1,98 @@
+---
+title: "Download"
+description: "Get Metrolist 13.4.0 for Android. Available as a stable release or nightly build from multiple sources."
+---
+
+Metrolist 13.4.0 requires **Android 8.0 (API 26)** or later. Choose a download source below.
+
+<Note>
+  Metrolist ships in two build variants:
+
+  - **FOSS** — the default variant. No Google Play Services dependency, no Google Cast support. Recommended for most users and compatible with F-Droid-based repositories.
+  - **GMS** — includes Google Cast support for casting to Chromecast and other Cast-compatible devices. Requires Google Play Services.
+
+  The IzzyOnDroid repository distributes its own FOSS variant with the built-in updater disabled (the repository handles updates instead).
+</Note>
+
+<Tabs>
+  <Tab title="Stable">
+    Stable releases are tested and recommended for everyday use.
+
+    <CardGroup cols={2}>
+      <Card title="GitHub Releases" icon="github" href="https://github.com/MetrolistGroup/Metrolist/releases/latest/download/Metrolist.apk">
+        Download the latest stable APK directly from the GitHub Releases page. Always up to date with the current version.
+      </Card>
+      <Card title="Obtainium" icon="box-open" href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/MetrolistGroup/Metrolist/">
+        Use Obtainium to track and install GitHub releases automatically. Keeps Metrolist updated without manual downloads.
+      </Card>
+      <Card title="IzzyOnDroid" icon="f-droid" href="https://apt.izzysoft.de/fdroid/index/apk/com.metrolist.music">
+        Install from the IzzyOnDroid F-Droid-compatible repository. The repository handles update delivery; the built-in updater is disabled in this variant.
+      </Card>
+      <Card title="OpenAPK" icon="globe" href="https://www.openapk.net/metrolist/com.metrolist.music/">
+        Browse and download Metrolist APKs from OpenAPK.
+      </Card>
+      <Card title="Belberi" icon="globe" href="https://belberi.com/metrolist/">
+        Download Metrolist from the Belberi app directory.
+      </Card>
+    </CardGroup>
+  </Tab>
+  <Tab title="Nightly">
+    Nightly builds are built automatically from the latest commit on the `main` branch. They include the newest changes but may be less stable than a tagged release.
+
+    <Warning>
+      Nightly builds are not production-tested. Features may be incomplete or broken. Use a stable release for everyday listening.
+    </Warning>
+
+    <Card title="GitHub Actions (nightly)" icon="github" href="https://nightly.link/MetrolistGroup/Metrolist/workflows/build/main/app-with-Google-Cast.zip">
+      Download the latest nightly build (GMS variant with Google Cast) via nightly.link. No GitHub account required.
+    </Card>
+
+    The nightly artifact is a ZIP file containing the APK. Extract it before installing.
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Steps>
+  <Step title="Download the APK">
+    Pick a source from the table above and download the APK file to your Android device. For GitHub Releases, tap the `.apk` link on the releases page or use the direct download link above.
+  </Step>
+  <Step title="Allow installation from unknown sources">
+    If you are installing from a source other than the Google Play Store, Android will ask you to allow installation from that source. When prompted, tap **Settings** and enable **Allow from this source** for your browser or file manager.
+
+    This setting is scoped to the app you install from — you do not need to enable it system-wide.
+  </Step>
+  <Step title="Install the APK">
+    Open the downloaded APK file. Tap **Install** and wait for the installation to complete.
+  </Step>
+  <Step title="Open Metrolist">
+    Launch Metrolist from your app drawer. You can start browsing YouTube Music immediately — no account required. To sync your library, see [account login](/setup/account-login).
+  </Step>
+</Steps>
+
+## Choosing a build variant
+
+| Variant | Google Cast | Built-in updater | Compatible with F-Droid repos |
+|---------|-------------|-----------------|-------------------------------|
+| FOSS (default) | No | Yes | Yes |
+| GMS | Yes | Yes | No |
+| IzzyOnDroid | No | No | Yes |
+
+If you do not use Chromecast or other Cast devices, use the **FOSS** variant. If you want to cast music to a TV or speaker, use the **GMS** variant from GitHub Releases or Obtainium.
+
+## Updating Metrolist
+
+- **Obtainium** — updates automatically when a new release is published on GitHub.
+- **IzzyOnDroid** — updates through your F-Droid client.
+- **GitHub Releases / OpenAPK / Belberi** — download and install the new APK over the existing installation. The FOSS and GMS variants include a built-in update checker that notifies you of new releases.
+- **Nightly** — re-download from the GitHub Actions link whenever you want the latest build.
+
+## Package information
+
+| Field | Value |
+|-------|-------|
+| Package name | `com.metrolist.music` |
+| Current version | `13.4.0` |
+| Minimum Android | Android 8.0 (API 26) |
+| Target Android | Android 16 (API 36) |
+| License | GPL-3.0 |

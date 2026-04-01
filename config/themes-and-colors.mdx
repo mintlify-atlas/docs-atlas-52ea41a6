@@ -1,0 +1,150 @@
+---
+title: Themes and colors
+description: Choose a color palette, switch between light, dark, and AMOLED-black modes, and understand how Material 3 colors work in Metrolist.
+---
+
+The **Themes and colors** screen is reached from **Settings → Appearance → Theme**. It lets you pick a color palette, set the display mode, and preview changes on a live mockup before committing.
+
+---
+
+## Color palettes
+
+Metrolist ships with 19 fixed color palettes plus one dynamic option. Tap any swatch to apply it instantly.
+
+<CardGroup cols={2}>
+  <Card title="Dynamic" icon="palette">
+    Uses Material You to extract accent colors directly from your current wallpaper. Requires Android 12 or later. This is the default selection.
+  </Card>
+  <Card title="Crimson" icon="circle">
+    Seed color `#EC5464` — a warm red-pink.
+  </Card>
+  <Card title="Rose" icon="circle">
+    Seed color `#D81B60` — a deep rose.
+  </Card>
+  <Card title="Purple" icon="circle">
+    Seed color `#8E24AA` — medium purple.
+  </Card>
+  <Card title="Deep Purple" icon="circle">
+    Seed color `#5E35B1` — dark violet.
+  </Card>
+  <Card title="Indigo" icon="circle">
+    Seed color `#3949AB` — classic indigo.
+  </Card>
+  <Card title="Blue" icon="circle">
+    Seed color `#1E88E5` — standard blue.
+  </Card>
+  <Card title="Sky Blue" icon="circle">
+    Seed color `#039BE5` — light sky blue.
+  </Card>
+  <Card title="Cyan" icon="circle">
+    Seed color `#00ACC1` — cyan.
+  </Card>
+  <Card title="Teal" icon="circle">
+    Seed color `#00897B` — teal.
+  </Card>
+  <Card title="Green" icon="circle">
+    Seed color `#43A047` — medium green.
+  </Card>
+  <Card title="Light Green" icon="circle">
+    Seed color `#7CB342` — yellow-green.
+  </Card>
+  <Card title="Lime" icon="circle">
+    Seed color `#C0CA33` — lime.
+  </Card>
+  <Card title="Yellow" icon="circle">
+    Seed color `#FDD835` — bright yellow.
+  </Card>
+  <Card title="Amber" icon="circle">
+    Seed color `#FFB300` — amber.
+  </Card>
+  <Card title="Orange" icon="circle">
+    Seed color `#FB8C00` — orange.
+  </Card>
+  <Card title="Deep Orange" icon="circle">
+    Seed color `#F4511E` — deep orange.
+  </Card>
+  <Card title="Brown" icon="circle">
+    Seed color `#6D4C41` — warm brown.
+  </Card>
+  <Card title="Grey" icon="circle">
+    Seed color `#757575` — neutral grey.
+  </Card>
+  <Card title="Blue Grey" icon="circle">
+    Seed color `#546E7A` — blue-tinted grey.
+  </Card>
+</CardGroup>
+
+<Note>
+  Selecting any palette other than Dynamic automatically disables the **Dynamic theme** toggle on the Appearance settings screen. To re-enable wallpaper-based colors, select the Dynamic swatch here.
+</Note>
+
+---
+
+## How color generation works
+
+Each palette seed color is passed through the **Material 3 (Material You) color system** via the [materialKolor](https://github.com/jordond/materialkolor) library using the `TonalSpot` palette style and the 2025 color spec. The system generates a full set of tonal roles from that single seed:
+
+| Role | Used for |
+|---|---|
+| Primary | Key interactive elements, FAB, selected state |
+| On Primary | Text and icons on primary surfaces |
+| Secondary | Supporting interactive elements |
+| Tertiary | Accent elements, complementary highlights |
+| Surface / Background | Page and container backgrounds |
+| Surface Variant | Cards, chips, input fields |
+
+The color swatches in the picker render a preview tile split into three sections — top half shows `onPrimary`, bottom-left shows `secondary`, bottom-right shows `tertiary` — giving you an accurate preview of how the palette distributes across the UI.
+
+When the Dynamic palette is selected and the device is running Android 12 or later, Metrolist uses the standard `dynamicDarkColorScheme` / `dynamicLightColorScheme` APIs instead of materialKolor, so the colors are identical to other Material You apps on the same device.
+
+---
+
+## Display mode
+
+The mode selector sits at the top of the theme controls card. Four modes are available, shown as circular swatches:
+
+<CardGroup cols={2}>
+  <Card title="System (Auto)" icon="smartphone">
+    Follows the Android system dark/light mode setting. The swatch renders with the device's actual dynamic colors when available. This is the default.
+  </Card>
+  <Card title="Light" icon="sun">
+    Forces a light background regardless of system setting.
+  </Card>
+  <Card title="Dark" icon="moon">
+    Forces a dark background. Surface and background colors are derived from the dark variant of the selected palette.
+  </Card>
+  <Card title="Black (Pure Black)" icon="circle">
+    Forces dark mode and replaces the `surface` and `background` color roles with pure `#000000`. All other palette roles remain intact.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Black mode is ideal for OLED and AMOLED displays. Because OLED pixels emit no light when rendering true black, using Black mode in a dark environment can meaningfully extend battery life compared to standard Dark mode.
+</Tip>
+
+---
+
+## Switching themes
+
+<Steps>
+  <Step title="Open the theme screen">
+    Go to **Settings → Appearance** and tap **Theme**.
+  </Step>
+  <Step title="Select a display mode">
+    Tap one of the four mode circles at the top of the controls card — System, Light, Dark, or Black.
+  </Step>
+  <Step title="Pick a color palette">
+    Scroll the palette row and tap a color swatch. The live mockup above the card updates immediately to preview the combination.
+  </Step>
+  <Step title="Return to the app">
+    Tap the back arrow. The theme applies instantly with no restart required.
+  </Step>
+</Steps>
+
+---
+
+## Pure Black mode and the mini player
+
+Enabling Black mode also sets the mini player background to **Pure Black** when the new mini player design is active. This ensures that the mini player does not break the all-black aesthetic on OLED panels.
+
+You can override the mini player background independently from **Settings → Appearance → Mini player background style** if you want a different combination (for example, Black mode with a gradient mini player).

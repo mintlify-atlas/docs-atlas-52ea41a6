@@ -1,0 +1,144 @@
+---
+title: Build variants
+description: Understand the three Metrolist build variants and when to use each one.
+---
+
+Metrolist is distributed through multiple channels, each with different requirements and capabilities. Three product flavors are defined in `app/build.gradle.kts` to serve these different distribution targets.
+
+<Note>
+  The **FOSS** variant is the recommended default for most contributors and users. It has no dependency on Google Play Services and is compatible with F-Droid.
+</Note>
+
+## Variants
+
+<Tabs>
+  <Tab title="FOSS">
+    **The default variant.** Fully compatible with F-Droid and other open-source app stores. Does not require Google Play Services.
+
+    | Property | Value |
+    |----------|-------|
+    | Google Cast | No |
+    | Built-in updater | Yes |
+    | Google Play Services required | No |
+    | F-Droid compatible | Yes |
+
+    **Build commands**
+
+    ```bash Release
+    ./gradlew :app:assembleFossRelease
+    ```
+
+    ```bash Debug
+    ./gradlew :app:assembleFossDebug
+    ```
+
+    Output path (debug): `app/build/outputs/apk/foss/debug/app-foss-debug.apk`
+  </Tab>
+
+  <Tab title="GMS">
+    Includes Google Cast support for casting playback to Chromecast and other Cast-enabled devices. Requires Google Play Services to be installed on the device.
+
+    | Property | Value |
+    |----------|-------|
+    | Google Cast | Yes |
+    | Built-in updater | Yes |
+    | Google Play Services required | Yes |
+    | F-Droid compatible | No |
+
+    **Build commands**
+
+    ```bash Release
+    ./gradlew :app:assembleGmsRelease
+    ```
+
+    ```bash Debug
+    ./gradlew :app:assembleGmsDebug
+    ```
+
+    The GMS variant pulls in `media3-cast`, `mediarouter`, and `cast-framework` as additional dependencies.
+  </Tab>
+
+  <Tab title="IzzyOnDroid">
+    Designed for distribution via the [IzzyOnDroid](https://apt.izzysoft.de/fdroid/index/apk/com.metrolist.music) F-Droid repository. The store manages update delivery, so the built-in updater is disabled.
+
+    | Property | Value |
+    |----------|-------|
+    | Google Cast | No |
+    | Built-in updater | No |
+    | Google Play Services required | No |
+    | F-Droid compatible | Yes |
+
+    **Build commands**
+
+    ```bash Release
+    ./gradlew :app:assembleIzzyRelease
+    ```
+
+    ```bash Debug
+    ./gradlew :app:assembleIzzyDebug
+    ```
+  </Tab>
+</Tabs>
+
+## Build types
+
+Each variant can be built in two build types.
+
+<AccordionGroup>
+  <Accordion title="release">
+    - Minification enabled (`isMinifyEnabled = true`)
+    - Resource shrinking enabled (`isShrinkResources = true`)
+    - Code obfuscation via R8 with ProGuard rules from `proguard-rules.pro`
+    - Not debuggable
+    - Requires a release signing keystore (configured via environment variables `STORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`)
+  </Accordion>
+  <Accordion title="debug">
+    - Minification disabled
+    - Debuggable
+    - App name suffix: `Metrolist Debug` (unless overridden)
+    - Package name suffix: `.debug` appended to application ID (unless `METROLIST_APPLICATION_ID` is set)
+    - Uses the persistent debug keystore at `app/persistent-debug.keystore` when present
+  </Accordion>
+</AccordionGroup>
+
+## Environment variable overrides
+
+The build system supports several environment variables for customising output without modifying source files. These are useful in CI environments and for custom forks.
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `METROLIST_APPLICATION_ID` | Override the app package name | `com.metrolist.music` |
+| `METROLIST_APP_NAME` | Override the app label shown on the launcher | `Metrolist` |
+| `METROLIST_DEBUG_KEYSTORE_PATH` | Path to a custom debug keystore file | `app/persistent-debug.keystore` |
+| `METROLIST_DEBUG_KEYSTORE_PASSWORD` | Password for the custom debug keystore | `android` |
+| `METROLIST_DEBUG_KEY_ALIAS` | Key alias in the debug keystore | `androiddebugkey` |
+| `METROLIST_DEBUG_KEY_PASSWORD` | Key password in the debug keystore | `android` |
+| `LASTFM_API_KEY` | LastFM API key for scrobbling | *(empty)* |
+| `LASTFM_SECRET` | LastFM API secret for scrobbling | *(empty)* |
+
+<Tip>
+  When `METROLIST_APPLICATION_ID` is set, the `.debug` suffix is not appended to the package name in debug builds. This allows installing a debug and release build side-by-side under distinct package names.
+</Tip>
+
+## Nightly builds
+
+Nightly builds are produced automatically by the GitHub Actions workflow defined in `.github/workflows/build.yml`. The workflow runs on every push to any branch and produces signed APKs for the FOSS and GMS variants.
+
+<CardGroup cols={2}>
+  <Card title="FOSS nightly" icon="box">
+    Artifact name: `app-release`
+
+    Built with `assembleFossRelease` and signed using the repository's release keystore secrets.
+  </Card>
+  <Card title="GMS nightly" icon="cast">
+    Artifact name: `app-with-Google-Cast`
+
+    Built with `assembleGmsRelease`. Requires a device with Google Play Services.
+  </Card>
+</CardGroup>
+
+Nightly artifacts can be downloaded from the [GitHub Actions workflow runs](https://github.com/MetrolistGroup/Metrolist/actions/workflows/build.yml) or via the `nightly.link` service linked in the README.
+
+<Warning>
+  Do not bump `versionCode` or `versionName` in `app/build.gradle.kts`. Version bumps are performed exclusively by the core development team after manual review.
+</Warning>

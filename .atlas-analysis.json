@@ -1,22 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "name": "Metrolist",
+  "projectType": "general",
+  "projectName": "Metrolist",
+  "projectDescription": "A free, open-source YouTube Music client for Android built with Kotlin and Jetpack Compose, featuring background playback, offline downloads, synced lyrics, music recognition, and real-time listen-together sessions.",
   "theme": "almond",
-  "colors": {
-    "primary": "#fdfdfd"
-  },
-  "favicon": "https://media.brand.dev/defa8896-7f61-446d-96c3-63eb60d20b2b.svg",
-  "navbar": {
-    "primary": {
-      "type": "github",
-      "href": "https://github.com/MetrolistGroup/Metrolist"
-    }
-  },
-  "footer": {
-    "socials": {
-      "github": "https://github.com/MetrolistGroup/Metrolist"
-    }
-  },
+  "primaryColor": "#fdfdfd",
+  "lightColor": null,
+  "darkColor": null,
   "navigation": {
     "tabs": [
       {
@@ -132,5 +121,37 @@
         ]
       }
     ]
-  }
+  },
+  "keyFeatures": [
+    "Stream songs and videos from YouTube Music without an account",
+    "Background playback with lock screen and notification controls",
+    "Download and cache songs for offline listening",
+    "Live synced lyrics with word-by-word highlighting from multiple providers (BetterLyrics, LrcLib, KuGou, YouTube)",
+    "AI-powered lyrics translation and romanization",
+    "Music recognition via Shazam integration",
+    "Listen Together — real-time synchronized playback with friends",
+    "Full YouTube Music account sync (songs, albums, artists, playlists)",
+    "Equalizer, audio normalization, tempo & pitch control",
+    "Home screen widget and Quick Settings tile",
+    "Material 3 design with dynamic color, 19 palette options, light/dark/black/dynamic themes",
+    "Discord Rich Presence integration",
+    "Last.fm scrobbling integration",
+    "Android Auto support",
+    "Podcast support with channel subscriptions",
+    "Sleep timer with fade-out and automatic scheduling",
+    "Statistics page with listening history and play counts"
+  ],
+  "publicApiSurface": [
+    "MusicService (MediaLibraryService for Android MediaSession)",
+    "PlayerConnection — exposes ExoPlayer state to UI via StateFlow",
+    "ListenTogetherManager — manages real-time listen-together sessions",
+    "LyricsHelper — fetches and prioritizes lyrics from registered providers",
+    "LyricsProviderRegistry — register/query lyrics providers (BetterLyrics, KuGou, LrcLib, YouTube, SimpMusic, Paxsenix)",
+    "MusicRecognitionService — Shazam-based music recognition foreground service",
+    "DownloadUtil — manages ExoDownloader cache and offline song storage",
+    "SleepTimer — configurable sleep timer with auto-scheduling and fade-out",
+    "DatabaseDao — Room DAO for songs, albums, artists, playlists, podcasts, stats",
+    "InnerTube module — internal YouTube Music API client (Kotlin)",
+    "QuickSettings tile — QS tile for music recognition shortcut"
+  ]
 }

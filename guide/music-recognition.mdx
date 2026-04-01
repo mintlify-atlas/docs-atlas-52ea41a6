@@ -1,0 +1,92 @@
+---
+title: "Music recognition"
+description: "Identify songs playing around you using Shazam-powered audio fingerprinting — built entirely in Kotlin, no NDK required."
+---
+
+Music recognition lets you hold your phone near any sound source and identify the song within seconds. Metrolist records 12 seconds of audio through your microphone, generates a Shazam-compatible fingerprint, and queries the Shazam API to find a match. When a song is found, you can tap the result to play it in Metrolist immediately.
+
+<Note>
+  Music recognition requires an internet connection. The Shazam API must be reachable to return a match — offline recognition is not supported.
+</Note>
+
+## How to start recognition
+
+<Tabs>
+  <Tab title="In-app button">
+    Open Metrolist and tap the microphone recognition button on the home screen. The app transitions through three states visible on screen:
+
+    1. **Listening** — recording 12 seconds of audio from your microphone
+    2. **Processing** — generating the audio fingerprint and querying Shazam
+    3. **Result** — song title and artist are shown; tap to play
+
+    If no match is found, the screen shows a "No match" message. Try again with clearer audio or less background noise.
+  </Tab>
+  <Tab title="Home screen widget">
+    Metrolist provides a music recognizer widget you can place on your Android home screen. Long-press your home screen, select **Widgets**, and add the Metrolist recognizer widget. Tapping it starts recognition immediately without opening the app.
+
+    <Tip>
+      The home screen widget is the fastest way to identify a song. Place it on your primary home screen so it is always one tap away.
+    </Tip>
+  </Tab>
+  <Tab title="Quick Settings tile">
+    Add the Metrolist recognition tile to your notification shade for instant one-tap access from anywhere on your device.
+
+    <Steps>
+      <Step title="Open Quick Settings">
+        Swipe down twice from the top of your screen to fully expand the Quick Settings panel.
+      </Step>
+      <Step title="Edit tiles">
+        Tap the pencil or **Edit** button to enter tile editing mode.
+      </Step>
+      <Step title="Add the Metrolist tile">
+        Find the Metrolist music recognition tile in the available tiles list and drag it into your active tiles area.
+      </Step>
+      <Step title="Tap to recognize">
+        Tap the tile at any time. Recognition runs as a foreground service with a persistent notification showing the current status, then displays the result in the notification shade when complete.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Recognition states
+
+During recognition, both the in-app UI and any active notification reflect the current stage:
+
+<CardGroup cols={2}>
+  <Card title="Listening" icon="microphone">
+    Metrolist is recording audio from your microphone. Hold your device near the sound source and keep background noise to a minimum.
+  </Card>
+  <Card title="Processing" icon="spinner">
+    The audio fingerprint has been generated and is being sent to the Shazam API. This typically takes one to two seconds.
+  </Card>
+  <Card title="Match found" icon="circle-check">
+    A song was identified. The result shows the title, artist, and album art. Tap it to play the track in Metrolist.
+  </Card>
+  <Card title="No match" icon="circle-xmark">
+    Shazam could not identify the audio. This can happen with very short clips, heavy distortion, or unusual recordings. Try again with a clearer sample.
+  </Card>
+</CardGroup>
+
+## Recognition history
+
+Every successfully recognized song is saved to your local recognition history. Metrolist stores the title, artist, album, cover art URL, genre, release date, and the timestamp of recognition in a local database — no cloud sync required.
+
+To view past recognitions, open the recognition screen within the app. Each entry shows the song details and the time it was recognized. Tap any entry to play that track in Metrolist.
+
+## Permissions
+
+Music recognition requires the **Record Audio** (`RECORD_AUDIO`) permission. Metrolist checks for this permission before starting recognition and prompts you to grant it if it has not been given. No audio data is stored on your device — only the Shazam fingerprint is transmitted to the API.
+
+## Technical details
+
+<AccordionGroup>
+  <Accordion title="How the fingerprint is generated">
+    Metrolist records mono audio at 44,100 Hz using the device microphone, then resamples it to the sample rate required by the VibraSignature algorithm. The resulting signature is sent to the Shazam API along with the sample duration. The entire implementation is pure Kotlin with no native code (NDK), rewritten in v13.2.0 to reduce APK size and improve compatibility.
+  </Accordion>
+  <Accordion title="QS tile notification behavior">
+    When recognition is triggered from the Quick Settings tile, Metrolist starts a foreground service (`RecognitionForegroundService`) that shows a low-priority persistent notification during recording and processing. On completion, the notification becomes dismissible and shows the result — including cover art if one can be fetched — with a **Listen on Metrolist** action button. Added in v13.3.0, with notification-based result delivery refined in v13.4.0.
+  </Accordion>
+  <Accordion title="Duplicate result handling">
+    When recognition is started from the home screen widget, the widget service persists the result to the database. The recognition screen detects this and skips inserting a duplicate entry, so each recognition event appears exactly once in history.
+  </Accordion>
+</AccordionGroup>

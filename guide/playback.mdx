@@ -1,0 +1,172 @@
+---
+title: "Playback"
+description: "Stream any song, album, artist, video, or playlist from YouTube Music. Learn how to control playback, use the sleep timer, and customize your audio experience."
+---
+
+## Finding music
+
+Use the **Search** tab (magnifying glass icon) to find content across YouTube Music. Metrolist searches across all content types at once.
+
+<CardGroup cols={2}>
+  <Card title="Songs" icon="music">
+    Individual tracks from YouTube Music's full catalog.
+  </Card>
+  <Card title="Albums" icon="disc-3">
+    Full studio and live albums with track listings.
+  </Card>
+  <Card title="Artists" icon="microphone">
+    Artist pages with discography, singles, and videos.
+  </Card>
+  <Card title="Videos" icon="video">
+    Official music videos and live performances.
+  </Card>
+  <Card title="Playlists" icon="list-music">
+    Public community playlists and curated YouTube Music playlists.
+  </Card>
+  <Card title="Profiles" icon="user">
+    Search other user profiles using the profile search filter.
+  </Card>
+</CardGroup>
+
+Tap any result to open it. Tap a song to start playing immediately.
+
+## Player controls
+
+Tap the mini-player bar at the bottom of the screen to open the full player. The player provides the following controls:
+
+| Control | Action |
+|---|---|
+| Play / Pause | Start or pause playback |
+| Previous | Jump to the previous track, or seek to the beginning of the current track |
+| Next | Skip to the next track in the queue |
+| Shuffle | Randomize the playback order of the current queue |
+| Repeat | Cycle through Off, Repeat All, and Repeat One |
+| Seek bar | Drag to jump to any position in the current track |
+
+Swipe left or right on the album art to skip tracks without opening the full player.
+
+## Background playback
+
+Metrolist runs as a foreground service, so music keeps playing when:
+
+- You turn the screen off
+- You switch to another app
+- You lock the device
+
+Playback continues until you explicitly pause it or the sleep timer fires.
+
+## Lock screen and notification controls
+
+When a song is playing, Metrolist shows a persistent media notification with play/pause, previous, and next controls. On supported devices, the same controls appear on the lock screen through Android's Media Session integration.
+
+<Info>
+  The notification also displays the current song title, artist, and album art. You can interact with it without unlocking your device.
+</Info>
+
+## Sleep timer
+
+The sleep timer automatically pauses playback after a set time. There are two ways to use it.
+
+### Manual sleep timer
+
+Open the player and tap the sleep timer icon (clock) to start a one-off timer.
+
+<Steps>
+  <Step title="Open the sleep timer dialog">
+    Tap the clock icon in the player controls.
+  </Step>
+  <Step title="Choose a duration">
+    Set the number of minutes, or select **End of song** to stop after the current track finishes.
+  </Step>
+  <Step title="Optionally enable stop after current song on timeout">
+    Toggle **Stop after current song** so that when the timer fires, Metrolist finishes the current track before pausing instead of cutting off mid-song.
+  </Step>
+  <Step title="Optionally enable fade-out">
+    Toggle **Fade out** to gradually reduce volume over the last 60 seconds before the timer fires (or over the remaining duration of the current song when using **End of song** mode).
+  </Step>
+</Steps>
+
+### Automatic sleep timer
+
+Configure a recurring sleep timer schedule under **Settings → Player & Audio → Sleep timer**.
+
+- **Daily** — activates every day between a start and end time (e.g., 22:00 to 06:00).
+- **Custom** — choose specific days of the week, each with its own start and end time window.
+
+<Tip>
+  Enable the automatic sleep timer with a 22:00 start time for hands-free bedtime listening. Combine it with **Fade out** so the music fades to silence rather than stopping abruptly.
+</Tip>
+
+## Music alarm
+
+Added in v13.4.0, the music alarm lets you schedule Metrolist to start playing music at a specific time — useful as a wake-up alarm or a scheduled listening reminder.
+
+<Steps>
+  <Step title="Open the alarm settings">
+    Go to **Settings → Player & Audio → Alarm** to access the music alarm scheduler.
+  </Step>
+  <Step title="Add an alarm">
+    Tap **Add alarm** and set the time using the time picker. Choose the days of the week the alarm should repeat.
+  </Step>
+  <Step title="Select a playlist">
+    Pick a local playlist to play when the alarm fires. You can also enable **Random** mode to shuffle the playlist.
+  </Step>
+  <Step title="Grant permissions">
+    The alarm requires the **Schedule exact alarms** permission on Android 12 and later. Metrolist will prompt you to grant it from the system settings. Disabling battery optimization for Metrolist is also recommended so the alarm fires reliably.
+  </Step>
+</Steps>
+
+<Note>
+  The music alarm is separate from the sleep timer. The sleep timer stops playback after a set duration; the music alarm starts playback at a scheduled time.
+</Note>
+
+## Skip silence
+
+When enabled, Metrolist detects and skips over silent segments within a track using ExoPlayer's `SilenceSkippingAudioProcessor`. Enable it under **Settings → Player → Skip silence**.
+
+An additional **Skip silence instantly** sub-option skips silence without a gradual transition. This option is only available when **Skip silence** is already on.
+
+## Audio quality
+
+Go to **Settings → Player → Audio quality** to choose between:
+
+- **Auto** — selects the best format available given your current connection (default)
+- **High** — always requests the highest available bitrate
+- **Low** — requests a lower bitrate to reduce data usage
+
+<Info>
+  The selected quality applies to both streaming and downloads. See [Audio settings](/config/audio-settings) for related options such as audio normalization, crossfade, and the equalizer.
+</Info>
+
+## Google Cast / Chromecast
+
+<Warning>
+  Google Cast is only available in the GMS (Google Mobile Services) build of Metrolist. It is not included in the FOSS or F-Droid builds.
+</Warning>
+
+If you installed the GMS build, you can enable Cast support under **Settings → Player → Google Cast**. Once enabled, a Cast icon appears in the player when a Chromecast or Cast-compatible device is detected on your network. Tap it to route audio to that device.
+
+## Additional player settings
+
+<AccordionGroup>
+  <Accordion title="Crossfade">
+    Smoothly blend the end of one track into the start of the next. Enable it under **Settings → Player → Crossfade** and set a duration between 1 and 15 seconds. A gapless option is also available to remove silence between tracks without audible overlap.
+
+    Note: audio offload is automatically disabled when crossfade is active.
+  </Accordion>
+  <Accordion title="Audio normalization">
+    Levels the volume across tracks so loud songs do not sound louder than quieter ones. Enabled by default under **Settings → Player → Audio normalization**.
+  </Accordion>
+  <Accordion title="Audio offload">
+    Offloads audio decoding to dedicated hardware, which can reduce battery consumption during long listening sessions. Enable it under **Settings → Player → Audio offload**. Not available when crossfade is on.
+  </Accordion>
+  <Accordion title="Auto-download on like">
+    Automatically downloads a song to local storage whenever you like it. Enable under **Settings → Player & Audio → Auto-download on like**.
+  </Accordion>
+  <Accordion title="Resume on Bluetooth connect">
+    Automatically resumes playback when a Bluetooth audio device connects. Enable under **Settings → Player & Audio → Resume on Bluetooth connect**.
+  </Accordion>
+  <Accordion title="Pause on mute">
+    Pauses playback when the device volume is set to zero. Enable under **Settings → Player & Audio → Pause on mute**.
+  </Accordion>
+</AccordionGroup>

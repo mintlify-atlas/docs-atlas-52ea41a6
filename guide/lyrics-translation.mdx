@@ -1,0 +1,112 @@
+---
+title: "Lyrics translation"
+description: "Translate or romanize lyrics in real time using an AI provider of your choice."
+---
+
+Metrolist can translate lyrics into your language — or romanize non-Latin scripts — using an AI backend you configure. Translation runs on demand and results are cached locally so the same song does not hit the API twice.
+
+<Note>
+  Lyrics translation requires an AI provider API key. Configure your provider and key in **Settings → AI** before using this feature. See [AI settings](/config/ai-settings) for the full setup guide.
+</Note>
+
+## How to enable translation
+
+<Steps>
+  <Step title="Configure an AI provider">
+    Go to **Settings → AI**, select a provider, and enter your API key. Choose a model from the presets or type a custom model name.
+  </Step>
+  <Step title="Set your target language">
+    In **Settings → AI → Target language**, pick the language you want lyrics translated into. Metrolist maps language codes to full names (e.g., `ja` → Japanese) for better AI comprehension.
+  </Step>
+  <Step title="Open the lyrics view">
+    Start playing a song and open the lyrics panel by tapping the lyrics icon in the player.
+  </Step>
+  <Step title="Trigger translation">
+    Tap the **translate** button in the lyrics panel. Translation begins immediately and lines populate progressively as the AI responds.
+  </Step>
+</Steps>
+
+## Supported AI providers
+
+Metrolist supports the following providers for translation:
+
+<CardGroup cols={2}>
+  <Card title="OpenRouter" icon="route">
+    Routes requests to any model available on OpenRouter (e.g., Gemini, GPT, LLaMA). Default provider. Supports streaming for progressive line-by-line display.
+  </Card>
+  <Card title="OpenAI" icon="robot">
+    Direct OpenAI API. Supports GPT-4o-mini, GPT-4o, and GPT-4 Turbo. Uses streaming.
+  </Card>
+  <Card title="Mistral" icon="wind">
+    Mistral AI API, added in v13.3.0. Models include `mistral-large-latest`, `mistral-medium-latest`, `mistral-small-latest`, and `mistral-tiny-latest`. Non-streaming path.
+  </Card>
+  <Card title="Google Gemini" icon="gem">
+    Google Generative Language API. Supports Gemini Flash, Gemini 2.5 Flash, and preview models. Uses streaming.
+  </Card>
+  <Card title="Anthropic Claude" icon="brain">
+    Anthropic API. Supports Claude Opus, Sonnet, and Haiku families. Uses streaming.
+  </Card>
+  <Card title="Perplexity" icon="magnifying-glass">
+    Perplexity AI API. Sonar model family. Uses streaming.
+  </Card>
+  <Card title="xAI (Grok)" icon="x">
+    xAI API. Grok models. Uses streaming.
+  </Card>
+  <Card title="DeepL" icon="language">
+    Neural machine translation — not a chat model. Only supports **Literal** translation mode. Requires a separate DeepL API key and optionally a formality setting (default, more formal, or less formal).
+  </Card>
+  <Card title="Custom" icon="wrench">
+    Point Metrolist at any OpenAI-compatible endpoint by entering a base URL and model name. Non-streaming.
+  </Card>
+</CardGroup>
+
+## Translation modes
+
+For AI chat providers (all except DeepL), choose between two translation strategies in **Settings → AI → Translation mode**:
+
+| Mode | Behavior |
+|------|----------|
+| **Literal** | Translates each line as closely as possible to the original meaning. Best for understanding the exact words. |
+| **Transcribed** | Adapts the translation for natural readability in the target language. Better for flow and context. |
+
+## Romanization
+
+Romanization converts non-Latin scripts to their phonetic Latin equivalents so you can sing along without knowing the script.
+
+Supported scripts include:
+
+- **Japanese** — Hiragana/Katakana via Kuromoji tokenizer; Kanji read via furigana
+- **Chinese** — Hanzi to Pinyin via the PinyinHelper library
+- **Korean** — Hangul to Romaja using the Revised Romanization system
+- **Cyrillic** — Covers Russian, Ukrainian, Serbian, Bulgarian, Belarusian, Kyrgyz, and Macedonian with language-aware rules
+- **Devanagari** — Hindi/Sanskrit phonetic mapping
+- **Gurmukhi** — Punjabi phonetic mapping
+
+Romanization is available as a separate mode alongside translation. Tap the romanization button in the lyrics panel to toggle it on or off.
+
+## Customizing the AI prompt
+
+You can override the system prompt Metrolist sends to the AI. In **Settings → AI → System prompt**, enter your own instructions. This was added in v13.4.0.
+
+If you leave the field blank or tap **Reset**, Metrolist reverts to its built-in default prompt optimized for line-by-line lyric translation.
+
+<Tip>
+  A custom prompt is useful when the default translation doesn't match your preferred style — for example, instructing the AI to preserve rhyme schemes, use informal speech, or target a regional dialect.
+</Tip>
+
+## Reverting to original lyrics
+
+To undo a translation, tap the **untranslate** button in the lyrics panel. This clears the translated text and restores the original lyrics. Untranslation support was introduced in v13.2.0.
+
+## Caching and persistence
+
+Translated lyrics are:
+
+1. Cached in memory during the session to avoid repeated API calls for the same song.
+2. Persisted to the local database so translations survive app restarts.
+
+If you change the target language or translation mode, Metrolist treats it as a new translation and fetches fresh results, overwriting the stored version.
+
+<Note>
+  Translations are stored per song, per language, and per mode. Changing any of these three values triggers a new API call.
+</Note>

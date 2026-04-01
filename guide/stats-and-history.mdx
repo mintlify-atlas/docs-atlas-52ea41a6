@@ -1,0 +1,102 @@
+---
+title: "Stats and history"
+description: "Track your listening habits with per-song play counts, total listening time, top artists, and a full chronological playback history."
+---
+
+Metrolist records every song you play locally on your device. The **Stats** screen surfaces that data as ranked lists and aggregated totals, while the **History** screen shows a chronological log of every playback event.
+
+## Accessing stats and history
+
+Both screens are reached from the **Library** tab:
+
+- **Library → Stats** — ranked listening statistics for songs, artists, and albums
+- **Library → History** — chronological playback log grouped by date
+
+## Stats screen
+
+<Tip>
+  Use the Stats screen to rediscover songs you used to play constantly. Sort by play count or total listening time to find tracks you may have forgotten.
+</Tip>
+
+### Stat period filter
+
+A row of filter chips at the top of the Stats screen controls which time window is used for all statistics. You can switch between four view modes:
+
+<CardGroup cols={2}>
+  <Card title="Continuous" icon="infinity">
+    A rolling window — choose 1 week, 1 month, 3 months, 6 months, 1 year, or all time. This is the default mode.
+  </Card>
+  <Card title="Weeks" icon="calendar-week">
+    Browse statistics week by week going back to your first recorded playback event.
+  </Card>
+  <Card title="Months" icon="calendar">
+    View statistics month by month. Multi-year months show the year label to avoid ambiguity.
+  </Card>
+  <Card title="Years" icon="calendar-days">
+    Aggregate stats grouped by calendar year.
+  </Card>
+</CardGroup>
+
+### What is tracked
+
+Each song's statistics include:
+
+- **Play count** — the number of times you have played the song
+- **Total listening time** — cumulative duration played in milliseconds, displayed as a formatted time string
+
+The Stats screen surfaces this data in three ranked lists:
+
+| List | Sorted by |
+|------|-----------|
+| Top songs | Total listening time and play count |
+| Top artists | Total listening time and song count |
+| Top albums | Total listening time and play count |
+
+Each item shows a ranked position number, a thumbnail, the play count, and the formatted listening time.
+
+### Playing from stats
+
+Tap any song in the top songs list to start a YouTube Music radio from that track. If you want to play all your top songs in order, tap the **Play all** button next to the songs section header. A shuffle FAB is also available — tap it to play your top songs in a random order. Added in v13.3.0.
+
+### Time transfer
+
+The time transfer tool lets you move accumulated listening time from one song to another. This is useful if two entries in your library represent the same track (for example, a duplicate from a different album or upload).
+
+To open time transfer, tap the **sync** icon in the top bar of the Stats screen. Select the source song (the one whose time you want to move) and the destination song, then confirm. The stats screen automatically switches to the **All time** view while the dialog is open so you can see the full accumulated time for both songs. Added in v13.4.0.
+
+### Stat playlists
+
+When you are signed in to YouTube Music, the Stats screen also shows automatically generated playlists — your weekly and monthly most-played collections, plus recap playlists from your YouTube Music account.
+
+### Searching artists
+
+Tap the search icon in the top bar to filter the artist list by name. Select one or more artists using the checkboxes to compare their stats side by side.
+
+## History screen
+
+The History screen shows every playback event in reverse chronological order, grouped by relative date label (Today, Yesterday, This Week, Last Week, then month/year for older entries).
+
+### Local vs. remote history
+
+If you are signed in to YouTube Music, a chip row at the top of the screen lets you switch between:
+
+- **Local history** — playback events recorded by Metrolist on your device
+- **Remote history** — your listening history as stored by YouTube Music on Google's servers
+
+Remote history is fetched on demand when you select that tab.
+
+### Playing from history
+
+Tap any song in local history to start a queue containing all songs from the same date group, starting from the tapped entry. Tap a song in remote history to start a YouTube Music radio from that track.
+
+### Searching history
+
+Tap the search icon in the top bar to filter both local and remote history by song title or artist name.
+
+### Selecting and acting on entries
+
+Long-press any local history entry to enter selection mode. Check additional songs, then tap the overflow menu to access bulk actions such as adding to a playlist or queue.
+
+### Shuffling history
+
+A shuffle FAB appears at the bottom right of the screen. Tap it to play all visible history entries in a random order.

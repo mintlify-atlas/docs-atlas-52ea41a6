@@ -1,0 +1,100 @@
+---
+title: "Queue management"
+description: "View, reorder, and control your playback queue. Learn about shuffle, repeat modes, radio, and settings that shape how Metrolist builds and maintains the queue."
+---
+
+## Viewing the queue
+
+While a song is playing, tap the **queue icon** in the player controls to open the current queue. The queue panel shows all upcoming tracks in order, with the currently playing song highlighted.
+
+## Reordering and removing songs
+
+- **Reorder** — drag the handle on the right side of any song row to move it to a different position.
+- **Remove** — swipe a song left or right to remove it from the queue. This uses the **Swipe to remove** gesture available throughout the queue panel.
+
+## Adding songs to the queue
+
+When you tap a song to play it, Metrolist replaces the current queue with the new selection. To add songs without replacing the queue, use the song context menu (long-press or tap the three-dot icon):
+
+| Action | Result |
+|---|---|
+| **Play next** | Inserts the song immediately after the currently playing track |
+| **Add to queue** | Appends the song to the end of the queue |
+
+## Shuffle mode
+
+Tap the **shuffle icon** in the player controls to toggle shuffle on or off. When shuffle is active, Metrolist randomizes the order of all tracks in the queue using `DefaultShuffleOrder`.
+
+<AccordionGroup>
+  <Accordion title="Persistent shuffle across queues">
+    When enabled, shuffle stays on when you switch to a new queue (for example, when you start playing a different album or playlist). Enable it under **Settings → Player & Audio → Queue → Persistent shuffle across queues**.
+  </Accordion>
+  <Accordion title="Remember shuffle and repeat">
+    Metrolist remembers your shuffle and repeat state between app restarts. This is enabled by default and can be turned off under **Settings → Player & Audio → Queue → Remember shuffle and repeat**.
+  </Accordion>
+  <Accordion title="Shuffle playlist first">
+    When you start playing a playlist or album in shuffle mode, this option shuffles the tracks immediately on load instead of starting at the first track. Enable it under **Settings → Player & Audio → Queue → Shuffle playlist first**.
+  </Accordion>
+</AccordionGroup>
+
+## Repeat modes
+
+Tap the **repeat icon** in the player controls to cycle through the three repeat modes:
+
+<CardGroup cols={3}>
+  <Card title="Off" icon="arrow-right">
+    Plays through the queue once and stops.
+  </Card>
+  <Card title="Repeat all" icon="repeat">
+    Loops the entire queue continuously.
+  </Card>
+  <Card title="Repeat one" icon="repeat-1">
+    Loops the current track indefinitely.
+  </Card>
+</CardGroup>
+
+## Persistent queue
+
+The queue is saved to disk whenever it changes and is restored automatically when you reopen Metrolist. This means your queue survives app restarts, reboots, and crashes.
+
+Persistent queue is **enabled by default**. You can turn it off under **Settings → Player & Audio → Queue → Persistent queue**.
+
+## Auto-load more
+
+When the end of the queue is approaching, Metrolist automatically loads additional related tracks to extend playback. This is powered by YouTube Music's "watch next" API (the same data used for radio queues).
+
+Auto-load more is **enabled by default**. Configure it under **Settings → Player & Audio → Queue**:
+
+- **Auto-load more** — toggle automatic queue extension on or off.
+- **Disable auto-load when repeat all is on** — stops auto-loading when Repeat All is active, so the queue stays finite and loops cleanly.
+
+## Radio mode
+
+Radio mode starts a YouTube Music radio seeded from the current song. It uses the `RDAMVM{videoId}` playlist endpoint to build a continuously refreshing queue of related tracks.
+
+<Steps>
+  <Step title="Open the song menu">
+    Long-press a song, or tap the three-dot menu in the player or queue.
+  </Step>
+  <Step title="Start radio">
+    Tap **Start radio**. Metrolist loads the radio queue immediately, starting seamlessly from the currently playing track so playback is not interrupted.
+  </Step>
+</Steps>
+
+<Info>
+  Radio can also be started from an album or artist context menu. The seeding track changes depending on where you launch it from.
+</Info>
+
+You can also start radio from an album, artist, or playlist page using the same context menu.
+
+## Prevent duplicate tracks
+
+When enabled, Metrolist checks whether a song is already in the queue before adding it, and skips the duplicate if it is. Enable it under **Settings → Player & Audio → Queue → Prevent duplicate tracks in queue**.
+
+## Auto-skip on error
+
+When a song cannot be played (for example, because it is unavailable or you are offline and it is not cached), Metrolist can automatically skip it and move to the next track. Enable this under **Settings → Player & Audio → Queue → Auto-skip on error**.
+
+## Similar content
+
+Metrolist can surface a **Similar content** section at the end of the queue showing tracks related to what you have been listening to. Toggle it under **Settings → Player & Audio → Queue → Enable similar content**.

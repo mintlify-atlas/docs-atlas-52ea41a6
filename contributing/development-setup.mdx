@@ -1,0 +1,156 @@
+---
+title: Development setup
+description: Set up a local development environment to build and run Metrolist from source.
+---
+
+## Prerequisites
+
+Before you begin, make sure the following tools are installed on your system.
+
+<CardGroup cols={3}>
+  <Card title="JDK 21" icon="java">
+    Required to compile Kotlin and run Gradle. Use any JDK 21 distribution such as Temurin.
+  </Card>
+  <Card title="Android platform tools" icon="mobile">
+    Needed to generate a debug keystore if you do not already have one.
+  </Card>
+  <Card title="protobuf-compiler v3.21+" icon="code">
+    Required to generate protobuf sources before building the app.
+  </Card>
+</CardGroup>
+
+<Note>
+  The setup has been tested on Linux. It should work on macOS and Windows with minor adjustments to shell commands.
+</Note>
+
+## Clone and build
+
+<Steps>
+  <Step title="Clone the repository">
+    Clone the repo and initialise all Git submodules. Metrolist relies on several submodules for its internal libraries.
+
+    ```bash
+    git clone https://github.com/MetrolistGroup/Metrolist
+    cd Metrolist
+    git submodule update --init --recursive
+    ```
+  </Step>
+
+  <Step title="Generate protobuf sources">
+    Metrolist uses Protocol Buffers for message serialisation. Run the generation script inside the `app` directory before building.
+
+    ```bash
+    cd app
+    bash generate_proto.sh
+    cd ..
+    ```
+  </Step>
+
+  <Step title="Generate a debug keystore">
+    A persistent debug keystore is required to sign debug builds consistently. If one does not already exist, generate it now.
+
+    ```bash
+    [ ! -f "app/persistent-debug.keystore" ] && keytool -genkeypair \
+      -v \
+      -keystore app/persistent-debug.keystore \
+      -storepass android \
+      -keypass android \
+      -alias androiddebugkey \
+      -keyalg RSA \
+      -keysize 2048 \
+      -validity 10000 \
+      -dname "CN=Android Debug,O=Android,C=US" \
+    || echo "Keystore already exists."
+    ```
+
+    <Tip>
+      Using a persistent keystore (rather than the default Android debug keystore) means your APK signature stays consistent across machines and rebuilds, which matters for testing upgrades.
+    </Tip>
+  </Step>
+
+  <Step title="Build the debug APK">
+    Assemble the FOSS debug variant using Gradle.
+
+    ```bash
+    ./gradlew :app:assembleFossDebug
+    ```
+
+    The output APK will be written to:
+
+    ```
+    app/build/outputs/apk/foss/debug/app-foss-debug.apk
+    ```
+  </Step>
+</Steps>
+
+## Optional: LastFM API keys
+
+Metrolist supports LastFM scrobbling. The API keys are optional — the app builds and runs without them, but scrobbling will not be functional.
+
+You can provide credentials in one of two ways:
+
+<Tabs>
+  <Tab title="local.properties">
+    Add the following lines to `local.properties` in the project root (create the file if it does not exist):
+
+    ```properties local.properties
+    LASTFM_API_KEY=your_api_key_here
+    LASTFM_SECRET=your_api_secret_here
+    ```
+  </Tab>
+  <Tab title="Environment variables">
+    Set the variables in your shell before running Gradle:
+
+    ```bash
+    export LASTFM_API_KEY=your_api_key_here
+    export LASTFM_SECRET=your_api_secret_here
+    ./gradlew :app:assembleFossDebug
+    ```
+  </Tab>
+</Tabs>
+
+Get your credentials from the [LastFM API account page](https://www.last.fm/api/account/create).
+
+<Note>
+  In CI/CD environments, these are stored as GitHub Actions secrets (`LASTFM_API_KEY` and `LASTFM_SECRET`) and injected automatically during the build. Never commit API keys to the repository.
+</Note>
+
+## Branch and commit conventions
+
+All contributors — human and automated — should follow these conventions to keep the repository history clean and navigable.
+
+### Branch naming
+
+| Prefix | Purpose |
+|--------|---------|
+| `fix/` | Bug fixes |
+| `feat/` | New features |
+| `ref/` | Refactoring |
+| `docs/` | Documentation changes |
+| `chore/` | Maintenance tasks |
+
+Branch names should be concise but descriptive enough to convey the purpose at a glance. For example: `feat/sleep-timer-widget` or `fix/playlist-reorder-crash`.
+
+### Commit messages
+
+Follow the conventional commits format:
+
+```
+type(scope): short description
+```
+
+The scope is optional. Examples:
+
+```
+feat(ui): add dark mode support
+fix(player): resolve crash on queue reorder
+chore: update Gradle wrapper to 8.10
+```
+
+## String resources
+
+<Warning>
+  All new or edited user-facing strings must be added to `app/src/main/res/values/metrolist_strings.xml`. Do **not** edit `strings.xml` or any other `metrolist_strings.xml` file in locale subdirectories — those are managed by the translation system.
+</Warning>
+
+Locale-specific files such as `app/src/main/res/values-fr/metrolist_strings.xml` are generated and updated via Weblate. See [Translations](/contributing/translations) for details.
